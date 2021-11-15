@@ -107,3 +107,10 @@ export type RestaurantTourismInfo = {
   readonly SrcUpdateTime: string
   readonly UpdateTime: string
 }
+
+export type Town = {
+  readonly City: string
+  readonly CityName: string
+  readonly TownCode: string
+  readonly TownName: string
+}
