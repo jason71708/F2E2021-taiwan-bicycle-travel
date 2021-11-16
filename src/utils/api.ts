@@ -30,3 +30,26 @@ export const fetchRequest = <T>(url: string): Promise<T> => {
       return response.json().then(data => data as T);
     })          
 }
+
+export const fetchBikeStationByCity = (city: string, params?: any) => {
+  return tdxAPI.get(
+    `/v2/Bike/Station/${city}`,
+    {
+      headers: getAuthorizationHeader(),
+      params
+    }
+  )
+}
+
+export const fetchBikeStationNearBy = ($spatialFilter: string, params?: any) => {
+  return tdxAPI.get(
+    `/v2/Bike/Station/NearBy`,
+    {
+      headers: getAuthorizationHeader(),
+      params: {
+        $spatialFilter,
+        ...params
+      }
+    }
+  )
+}
