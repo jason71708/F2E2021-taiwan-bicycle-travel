@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import Header from './components/Header'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Town } from './types/api'
 import { fetchRequest } from './utils/api'
+
 
 const test: [number, number][] = [
   [24.178695, 120.64501],
@@ -22,6 +24,7 @@ function App() {
 
   return (
     <div>
+      <Header></Header>
       <h1>App</h1>
       <MapContainer
         style={{ height: 600, width: 1200 }}
