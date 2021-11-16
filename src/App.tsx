@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
+import { BrowserRouter, Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
+import { Routes } from './types/routes'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Town } from './types/api'
 import { fetchRequest } from './utils/api'
@@ -23,9 +25,18 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <BrowserRouter basename={
+      process.env.NODE_ENV === 'production' ?
+      process.env.REACT_APP_GITHUB_PAGE_PATH :
+      '/'
+    }>
       <Header></Header>
-      <h1>App</h1>
+      <RouterRoutes>
+        <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
+        <Route path={Routes.Bicycle} element={<div>Bicycle</div>}></Route>
+        <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
+        {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
+      </RouterRoutes>
       <MapContainer
         style={{ height: 600, width: 1200 }}
         center={[24.172421, 120.6481]}
@@ -48,7 +59,7 @@ function App() {
       <code>
         {JSON.stringify(code)}
       </code>
-    </div>
+    </BrowserRouter>
   )
 }
 
