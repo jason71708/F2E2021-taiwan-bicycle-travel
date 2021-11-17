@@ -30,14 +30,14 @@ function App() {
       process.env.REACT_APP_GITHUB_PAGE_PATH :
       '/'
     }>
-      <Header></Header>
+      <Header />
       <RouterRoutes>
         <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
         <Route path={Routes.Bicycle} element={<div>Bicycle</div>}></Route>
         <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
         {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
       </RouterRoutes>
-      <MapContainer
+      {/* <MapContainer
         style={{ height: 600, width: 1200 }}
         center={[24.172421, 120.6481]}
         zoom={13}
@@ -55,7 +55,7 @@ function App() {
             </Popup>
           </Marker>
         ))}
-      </MapContainer>
+      </MapContainer> */}
       <code>
         {JSON.stringify(code)}
       </code>
