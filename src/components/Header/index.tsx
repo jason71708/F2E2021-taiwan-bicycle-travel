@@ -11,7 +11,7 @@ const Header = () => {
     <>
       <HeaderWrapper>
         <HeaderContent>
-          <LogoWrapper src="/logo.png" alt="logo" />
+          <LogoWrapper src="./logo.png" alt="logo" />
           {isMdBp ? (
             <NavBar />
           ) : (
