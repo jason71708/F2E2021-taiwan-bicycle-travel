@@ -1,4 +1,10 @@
 const theme = {
+  layout: {
+    headerHeight: {
+      default: '36px',
+      md: '75px'
+    }
+  },
   typography: {
     h1: '45px',
     h2: '36px',

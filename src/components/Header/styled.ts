@@ -14,12 +14,12 @@ export const HeaderContent = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1440px;
-  height: 36px;
+  height: ${props => props.theme.layout.headerHeight.default};
   padding: 10px 20px;
 
   ${breakpoint('md')`
     padding: 20px 72px;
-    height: 75px;
+    height: ${props => props.theme.layout.headerHeight.md};
   `}
 `
 
