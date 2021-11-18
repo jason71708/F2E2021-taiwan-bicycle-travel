@@ -1,38 +1,48 @@
-import { fork, call, put, take, takeEvery, delay } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
+import { BikeStation, BikeAvailability } from '../../utils/api/types'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { stationRequestAction, stationSuccessAction, stationFailureAction, RequestPayload } from '.'
-import { fetchBikeStationByCity, required, searchFields } from '../../utils/api/station'
+import { fetchBikeStationByCity, stationRequired, stationSearchFields } from '../../utils/api/station'
+import { fetchAvailabilityStationByCity, availabilityRequired } from '../../utils/api/availability'
 import { transformKeysToFilter, transfromPositionToSpatialFilter } from '../../utils/api'
 
-// fetchBikeStationByCity({ $filter: transformKeysToFilter(required, [{ keyword: '', searchFields }]), city: '' })
+function* fetchStationSaga({ payload: { keyword, city } }: PayloadAction<RequestPayload>) {
+  try {
+    const stationResponse: { data: BikeStation[] } = yield call(fetchBikeStationByCity, { $filter: transformKeysToFilter(stationRequired, [{ keyword, searchFields: stationSearchFields }]), city })
+    const availabilityResponse: { data: BikeAvailability[] } = yield call(fetchAvailabilityStationByCity, { $filter: transformKeysToFilter(availabilityRequired), city })
 
-function* fetchStationSaga(payload: PayloadAction<RequestPayload>) {
-  console.log('fetchStationSaga start')
-  yield delay(2000)
-  console.log('delay 200')
-  yield put(stationSuccessAction({ data: [] }))
-  // try {
-  //   const { data }: { data: ActivityTourismInfo[] } = yield call(fetchActivities, parameters)
-  //   yield put(
-  //     fetchActivitiesSuccess({
-  //       activities: data
-  //     })
-  //   )
-  // } catch (error: any) {
-  //   yield put(
-  //     fetchActivitiesFailure({
-  //       error
-  //     })
-  //   )
-  // }
+    const data = stationResponse.data.reduce((result, station) => {
+      const index = availabilityResponse.data.findIndex(availability => availability.StationID === station.StationID)
+      if (index > -1) {
+        result.push(Object.assign(station, availabilityResponse.data[index]))
+      }
+      return result
+    }, [] as (BikeStation & BikeAvailability)[])
+
+    yield put(
+      stationSuccessAction({
+        data
+      })
+    )
+  } catch (error: any) {
+    yield put(
+      stationFailureAction({
+        error
+      })
+    )
+  }
 }
 
 function* stationSaga() {
-  // while (true) {
-    // const { payload }: { payload: TDXAPIParameters } = yield take(activityTypes.FETCH_ACTIVITY_REQUEST);
-    // yield fork(fetchStationSaga, payload)
-    yield takeEvery(stationRequestAction, fetchStationSaga)
-  // }
+  yield takeLatest(stationRequestAction, fetchStationSaga)
 }
+
+/**** use take effect case  ****/
+// function* stationSaga() {
+//   while (true) {
+//     const payload: PayloadAction<RequestPayload> = yield take(stationRequestAction)
+//     yield fork(fetchStationSaga, payload)
+//   }
+// }
 
 export default stationSaga

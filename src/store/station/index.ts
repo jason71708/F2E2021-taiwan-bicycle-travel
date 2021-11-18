@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { BikeStation } from '../../utils/api/types'
+import { BikeStation, BikeAvailability } from '../../utils/api/types'
 import { InitialState, SuccessPayload, FailurePayload } from '../types'
 
-const initialState: InitialState<BikeStation[]> = {
+const initialState: InitialState<(BikeStation & BikeAvailability)[]> = {
   pedding: false,
   data: [],
   error: null
@@ -22,12 +22,9 @@ export const stationSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      console.log('reducers.request')
       state.pedding = true
     },
-    success: (state, action: PayloadAction<SuccessPayload<BikeStation[]>>) => {
-      console.log('reducers.success')
-      console.log(action)
+    success: (state, action: PayloadAction<SuccessPayload<(BikeStation & BikeAvailability)[]>>) => {
       state.pedding = false
       state.data = action.payload.data
       state.error = null

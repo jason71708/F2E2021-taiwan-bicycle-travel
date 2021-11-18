@@ -11,4 +11,6 @@ export const SearchListWrapper = styled.section`
   padding: 28px;
   box-shadow: 4px 4px 20px 0 ${props => props.theme.colors.grey[500]}30;
   border-radius: 8px;
+  cursor: initial;
+  overflow: auto;
 `

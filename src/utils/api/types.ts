@@ -8,24 +8,24 @@ export type TourismPicture = {
 }
 
 export type PointType = {
-  readonly PositionLon?: number
-  readonly PositionLat?: number
+  readonly PositionLon: number
+  readonly PositionLat: number
   readonly GeoHash?: string
 }
 
 export type NameType = {
-  readonly Zh_tw?: string
+  readonly Zh_tw: string
   readonly En?: string
 }
 
 export type BikeStation = {
-  readonly StationUID?: String
-  readonly StationID?: String
-  readonly AuthorityID?: String
-  readonly StationName?: NameType
-  readonly StationPosition?: PointType
+  readonly StationUID?: string
+  readonly StationID: string
+  readonly AuthorityID?: string
+  readonly StationName: NameType
+  readonly StationPosition: PointType
   readonly StationAddress?: NameType
-  readonly StopDescription?: String
+  readonly StopDescription?: string
   readonly BikesCapacity?: number
   readonly ServiceType?: number
   readonly SrcUpdateTime?: string
@@ -33,31 +33,31 @@ export type BikeStation = {
 }
 
 export type BikeAvailability = {
-  readonly StationUID?: String
-  readonly StationID?: String
-  readonly ServiceStatus?: number
+  readonly StationUID?: string
+  readonly StationID: string
+  readonly ServiceStatus: number
   readonly ServiceType?: number
-  readonly AvailableRentBikes?: number
-  readonly AvailableReturnBikes?: number
+  readonly AvailableRentBikes: number
+  readonly AvailableReturnBikes: number
   readonly SrcUpdateTime?: string
   readonly UpdateTime: string
 }
 
 export type BikeShape = {
-  readonly RouteName: String
-  readonly AuthorityName?: String
-  readonly CityCode: String
-  readonly City: String
-  readonly Town?: String
-  readonly RoadSectionStart?: String
-  readonly RoadSectionEnd?: String
-  readonly Direction?: String
-  readonly CyclingType?: String
+  readonly RouteName: string
+  readonly AuthorityName?: string
+  readonly CityCode: string
+  readonly City: string
+  readonly Town?: string
+  readonly RoadSectionStart?: string
+  readonly RoadSectionEnd?: string
+  readonly Direction?: string
+  readonly CyclingType?: string
   readonly CyclingLength?: number
-  readonly FinishedTime?: String
+  readonly FinishedTime?: string
   readonly UpdateTime: string
-  readonly Geometry: String
-  readonly EncodedPolyline: String
+  readonly Geometry: string
+  readonly EncodedPolyline: string
 }
 
 export type ScenicSpotTourismInfo = {

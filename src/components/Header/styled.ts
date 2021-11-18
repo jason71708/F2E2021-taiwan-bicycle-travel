@@ -13,7 +13,6 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
   height: ${props => props.theme.layout.headerHeight.default};
   padding: 10px 20px;
 

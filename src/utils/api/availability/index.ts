@@ -1,6 +1,6 @@
 import { tdxAPI, getAuthorizationHeader, GeneralParameter, SearchByCityParameter, NearByParameter } from '..'
 
-export const required = ['StationID', 'ServiceStatus', 'AvailableRentBikes', 'AvailableReturnBikes']
+export const availabilityRequired = ['StationID', 'ServiceStatus', 'AvailableRentBikes', 'AvailableReturnBikes']
 
 export const fetchAvailabilityStationByCity = (
   {

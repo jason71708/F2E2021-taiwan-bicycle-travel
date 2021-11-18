@@ -1,22 +1,32 @@
 
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { MapContainer as Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Map as LeafletMap } from 'leaflet';
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store'
 import { Routes } from '../../constants/routes'
 import SearchList from '../SearchList'
-
-const test: [number, number][] = [
-  [24.178695, 120.64501],
-  [24.167898, 120.638895],
-  [24.161438, 120.648701]
-]
+import { useEffect, useState } from 'react'
 
 const MapContainer = () => {
+  const [map, setMap] = useState<LeafletMap | null>(null)
+  const { data } = useSelector(
+    (state: RootState) => state.station
+  )
+
+  useEffect(() => {
+    if (data.length > 0 && map) {
+      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 15)
+    }
+  }, [data, map])
+
   return (
     <Map
       style={{ height: '100%', width: '100%' }}
       center={[23.703875, 120.982024]}
       zoom={8}
+      whenCreated={setMap}
       scrollWheelZoom={true}
       zoomControl={false}
     >
@@ -31,10 +41,13 @@ const MapContainer = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <MarkerClusterGroup>
-        {test.map((tes, index) => (
-          <Marker key={index} position={tes}>
+        {data.map(station => (
+          <Marker key={station.StationUID} position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}>
             <Popup>
-              My position <br /> {tes.join(', ')}
+              <h1>{station.StationName.Zh_tw.split('_')[1]}</h1>
+              <p>{station.AvailableRentBikes}</p>
+              <p>{station.AvailableReturnBikes}</p>
+              <p>{station.ServiceStatus}</p>
             </Popup>
           </Marker>
         ))}

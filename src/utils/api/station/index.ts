@@ -1,7 +1,7 @@
 import { tdxAPI, getAuthorizationHeader, GeneralParameter, SearchByCityParameter, NearByParameter } from '..'
 
-export const required = ['StationID', 'StationName/Zh_tw', 'StationPosition/PositionLon', 'StationPosition/PositionLat']
-export const searchFields = ['StationName/Zh_tw', 'StationAddress/Zh_tw']
+export const stationRequired = ['StationID', 'StationName/Zh_tw', 'StationPosition/PositionLon', 'StationPosition/PositionLat']
+export const stationSearchFields = ['StationName/Zh_tw', 'StationAddress/Zh_tw']
 
 export const fetchBikeStationByCity = (
   {
