@@ -2,7 +2,7 @@
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { MapContainer as Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
-import { Routes } from '../../types/routes'
+import { Routes } from '../../constants/routes'
 import SearchList from '../SearchList'
 
 const test: [number, number][] = [

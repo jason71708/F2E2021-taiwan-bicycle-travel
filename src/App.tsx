@@ -4,6 +4,11 @@ import { BrowserRouter } from 'react-router-dom'
 import Header from './components/Header'
 import MapContainer from './components/MapContainer'
 
+import { AppDispatch, RootState } from './store'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { stationRequestAction } from './store/station'
+
 const AppContent = styled.div`
   position: relative;
   width: 100vw;
@@ -15,13 +20,16 @@ const AppContent = styled.div`
 `
 
 const App = () => {
-  // useEffect(() => {
-  //   fetchRequest<Town[]>('./data/town.json').then(data => {
-  //     setCode(data)
-  //   }).catch(error => {
-  //     console.log(error)
-  //   })
-  // }, [])
+  const dispatch = useDispatch<AppDispatch>()
+  const { pedding, data, error } = useSelector(
+    (state: RootState) => state.station
+  )
+
+  console.log(pedding, data, error)
+
+  useEffect(() => {
+    dispatch(stationRequestAction({ keyword: 'string', city: 'string' }))
+  }, [dispatch])
 
   return (
     <BrowserRouter basename={process.env.REACT_APP_GITHUB_PAGE_PATH}>

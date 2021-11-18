@@ -1,6 +1,6 @@
 import { NavBarWrapper, LinkContent } from './styled'
 import { Link, useLocation } from 'react-router-dom'
-import { Routes } from '../../types/routes'
+import { Routes } from '../../constants/routes'
 
 const NavBar = () => {
   const location = useLocation()
