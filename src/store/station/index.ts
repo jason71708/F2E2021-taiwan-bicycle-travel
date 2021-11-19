@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { BikeStation, BikeAvailability } from '../../utils/api/types'
 import { InitialState, SuccessPayload, FailurePayload } from '../types'
 
-const initialState: InitialState<(BikeStation & BikeAvailability)[]> = {
+export type Station = BikeStation & BikeAvailability
+
+const initialState: InitialState<Station[]> = {
   pedding: false,
   data: [],
   error: null

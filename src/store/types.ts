@@ -11,3 +11,8 @@ export type InitialState<T> = {
   data: T
   error: string | null
 }
+
+export enum DisplayStationStatus {
+  Rent = 'Rent',
+  Return = 'Return'
+}

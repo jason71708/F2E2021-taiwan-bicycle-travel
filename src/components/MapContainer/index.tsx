@@ -1,7 +1,7 @@
 
 import MarkerClusterGroup from 'react-leaflet-markercluster'
-import { MapContainer as Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Map as LeafletMap } from 'leaflet';
+import { MapContainer as Map, TileLayer } from 'react-leaflet'
+import { Map as LeafletMap } from 'leaflet'
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
@@ -9,7 +9,9 @@ import { Routes } from '../../constants/routes'
 import SearchList from '../SearchList'
 import { useEffect, useRef, useState } from 'react'
 import PositionButton from '../PositionButton'
-import { GeolocationInitialState } from '../../store/geolocation';
+import { GeolocationInitialState } from '../../store/geolocation'
+import Markers from '../Marks'
+import { DisplayStationStatus } from '../../store/types'
 
 const MapContainer = () => {
   const positionHistory = useRef<GeolocationInitialState['position']>(null)
@@ -56,19 +58,18 @@ const MapContainer = () => {
       <PositionButton />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       />
-      {position && <Marker position={position} />}
+      {position && (
+        <Markers.PositionMarker position={position} />
+      )}
       <MarkerClusterGroup>
         {data.map(station => (
-          <Marker key={station.StationUID} position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}>
-            <Popup>
-              <h1>{station.StationName.Zh_tw.split('_')[1]}</h1>
-              <p>{station.AvailableRentBikes}</p>
-              <p>{station.AvailableReturnBikes}</p>
-              <p>{station.ServiceStatus}</p>
-            </Popup>
-          </Marker>
+          <Markers.StationMarker
+            type={DisplayStationStatus.Rent}
+            key={station.StationID}
+            station={station}
+          />
         ))}
       </MarkerClusterGroup>
     </Map>
