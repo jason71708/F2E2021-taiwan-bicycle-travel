@@ -5,8 +5,7 @@ import breakpoint from '../../styles/breakpoint'
 export const PositionButtonWrapper = styled.button<{ active: boolean, locating: boolean }>`
   position: absolute;
   top: 36px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: calc(50% - 20px);
   width: 40px;
   height: 40px;
   border-radius: 100%;

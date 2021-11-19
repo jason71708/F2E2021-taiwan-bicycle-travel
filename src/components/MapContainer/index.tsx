@@ -7,13 +7,18 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { Routes } from '../../constants/routes'
 import SearchList from '../SearchList'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PositionButton from '../PositionButton'
+import { GeolocationInitialState } from '../../store/geolocation';
 
 const MapContainer = () => {
+  const positionHistory = useRef<GeolocationInitialState['position']>(null)
   const [map, setMap] = useState<LeafletMap | null>(null)
   const { data } = useSelector(
     (state: RootState) => state.station
+  )
+  const position = useSelector(
+    (state: RootState) => state.geolocation.position
   )
 
   useEffect(() => {
@@ -21,6 +26,17 @@ const MapContainer = () => {
       map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 15)
     }
   }, [data, map])
+
+  useEffect(() => {
+    if (
+      positionHistory.current === null
+      && position
+      && map
+    ) {
+      map.flyTo([position[0], position[1]], 17)
+    }
+    positionHistory.current = position
+  }, [position, map])
 
   return (
     <Map
@@ -42,6 +58,7 @@ const MapContainer = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      {position && <Marker position={position} />}
       <MarkerClusterGroup>
         {data.map(station => (
           <Marker key={station.StationUID} position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}>

@@ -41,7 +41,7 @@ const PositionButton = () => {
   const stopWatchPositionAndReset = () => {
     if (watchPositionId) {
       navigator.geolocation.clearWatch(watchPositionId)
-      dispatch(geolocationResetAction)
+      dispatch(geolocationResetAction())
     }
   }
 

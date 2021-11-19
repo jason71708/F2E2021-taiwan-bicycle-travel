@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type InitialState = {
+export type GeolocationInitialState = {
   position: [number, number] | null
 }
 
-const initialState: InitialState = {
+const initialState: GeolocationInitialState = {
   position: null
 }
 
@@ -17,6 +17,10 @@ export const geolocationSlice = createSlice({
   initialState,
   reducers: {
     update: (state, action: PayloadAction<UpdatePayload>) => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
       state.position = action.payload.position
     },
     reset: state => {
