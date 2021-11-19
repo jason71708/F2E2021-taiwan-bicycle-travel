@@ -1,15 +1,35 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { BikeStation, BikeAvailability } from '../../utils/api/types'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { stationRequestAction, stationSuccessAction, stationFailureAction, RequestPayload } from '.'
-import { fetchBikeStationByCity, stationRequired, stationSearchFields } from '../../utils/api/station'
-import { fetchAvailabilityStationByCity, availabilityRequired } from '../../utils/api/availability'
+import { stationRequestAction, stationSuccessAction, stationFailureAction, RequestPayload, NearByRequestPayload } from '.'
+import { fetchBikeStationByCity, fetchBikeStationNearBy, stationRequired, stationSearchFields } from '../../utils/api/station'
+import { fetchAvailabilityStationByCity, fetchAvailabilityStationNearBy, availabilityRequired } from '../../utils/api/availability'
 import { transformKeysToFilter, transfromPositionToSpatialFilter } from '../../utils/api'
 
-function* fetchStationSaga({ payload: { keyword, city } }: PayloadAction<RequestPayload>) {
+function* fetchStationSaga({ payload }: PayloadAction<RequestPayload | NearByRequestPayload>) {
   try {
-    const stationResponse: { data: BikeStation[] } = yield call(fetchBikeStationByCity, { $filter: transformKeysToFilter(stationRequired, [{ keyword, searchFields: stationSearchFields }]), city })
-    const availabilityResponse: { data: BikeAvailability[] } = yield call(fetchAvailabilityStationByCity, { $filter: transformKeysToFilter(availabilityRequired), city })
+    let stationResponse: { data: BikeStation[] }
+    let availabilityResponse: { data: BikeAvailability[] }
+
+    if ('position' in payload) {
+      stationResponse = yield call(fetchBikeStationNearBy, {
+        $filter: transformKeysToFilter(stationRequired),
+        $spatialFilter: transfromPositionToSpatialFilter(payload.position)
+      })
+      availabilityResponse = yield call(fetchAvailabilityStationNearBy, {
+        $filter: transformKeysToFilter(availabilityRequired),
+        $spatialFilter: transfromPositionToSpatialFilter(payload.position)
+      })
+    } else {
+      const { keyword, city } = payload
+      stationResponse = yield call(fetchBikeStationByCity, {
+        $filter: transformKeysToFilter(stationRequired, [{ keyword, searchFields: stationSearchFields }]),
+        city
+      })
+      availabilityResponse = yield call(fetchAvailabilityStationByCity, {
+        $filter: transformKeysToFilter(availabilityRequired), city
+      })
+    }
 
     const data = stationResponse.data.reduce((result, station) => {
       const index = availabilityResponse.data.findIndex(availability => availability.StationID === station.StationID)

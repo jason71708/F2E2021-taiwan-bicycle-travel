@@ -48,6 +48,7 @@ export type SearchByCityParameter = {
 
 export type NearByParameter = {
   $spatialFilter: ReturnType<TransfromPositionToSpatialFilter>
+  $filter: ReturnType<TransformKeysToFilter>
 }
 
 /*********************************************/

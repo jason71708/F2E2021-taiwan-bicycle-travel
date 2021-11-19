@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { SearchListWrapper } from './styled'
 import { basicCities } from '../../constants/cities'
-import { AppDispatch, RootState } from '../../store'
+import { RootState, AppDispatch } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
 import { stationRequestAction } from '../../store/station'
 import L from 'leaflet'
 
 const SearchList = () => {
-  const domRef = useRef(null);
+  const domRef = useRef(null)
   const dispatch = useDispatch<AppDispatch>()
   const { pedding, data, error } = useSelector(
     (state: RootState) => state.station

@@ -25,7 +25,8 @@ export const fetchBikeStationByCity = (
 export const fetchBikeStationNearBy = (
   {
     $format = 'JSON',
-    $spatialFilter
+    $spatialFilter,
+    $filter
   } : GeneralParameter & NearByParameter
 ) => {
   return tdxAPI.get(
@@ -34,7 +35,8 @@ export const fetchBikeStationNearBy = (
       headers: getAuthorizationHeader(),
       params: {
         $format,
-        $spatialFilter
+        $spatialFilter,
+        $filter
       }
     }
   )

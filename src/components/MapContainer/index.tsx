@@ -8,6 +8,7 @@ import { RootState } from '../../store'
 import { Routes } from '../../constants/routes'
 import SearchList from '../SearchList'
 import { useEffect, useState } from 'react'
+import PositionButton from '../PositionButton'
 
 const MapContainer = () => {
   const [map, setMap] = useState<LeafletMap | null>(null)
@@ -36,6 +37,7 @@ const MapContainer = () => {
         <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
         {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
       </RouterRoutes>
+      <PositionButton />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
