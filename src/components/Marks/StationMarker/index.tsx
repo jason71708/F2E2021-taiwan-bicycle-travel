@@ -17,7 +17,7 @@ const stationIcons = [stationDefaultSvg, stationLimitedSvg, stationDisabledSvg].
   })
 })
 
-const StationMarker = ({ station, key, type }: { station: Station, key: string, type: DisplayStationStatus }) => {
+const StationMarker = ({ station, type }: { station: Station, key: string, type: DisplayStationStatus }) => {
   const displayIcon = useCallback((station: Station, type: DisplayStationStatus) => {
     if (station.ServiceStatus !== 1) return stationIcons[2]
     if (type === DisplayStationStatus.Rent) {
@@ -31,7 +31,6 @@ const StationMarker = ({ station, key, type }: { station: Station, key: string, 
 
   return (
     <LeafMarker
-      key={key}
       icon={displayIcon(station, type)}
       position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}
     >

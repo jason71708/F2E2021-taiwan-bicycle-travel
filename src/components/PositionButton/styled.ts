@@ -24,6 +24,7 @@ export const PositionButtonWrapper = styled.button<{ active: boolean, locating: 
   }
 
   ${breakpoint('md')`
+    left: calc(50% - 30px);
     font-size: 30px;
     width: 60px;
     height: 60px;

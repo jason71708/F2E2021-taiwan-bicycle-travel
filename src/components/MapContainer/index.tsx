@@ -34,7 +34,7 @@ const MapContainer = () => {
       && position
       && map
     ) {
-      map.flyTo([position[0], position[1]], 17)
+      map.flyTo([position[0], position[1]], 18)
     }
     positionHistory.current = position
   }, [position, map])

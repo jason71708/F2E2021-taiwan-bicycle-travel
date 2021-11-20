@@ -36,6 +36,7 @@ export const stationSlice = createSlice({
       state.error = null
     },
     failure: (state, action: PayloadAction<FailurePayload>) => {
+      state.pedding = false
       state.error = action.payload.error
     }
   }

@@ -11,6 +11,7 @@ export const NavBarWrapper = styled.nav`
   position: absolute;
   top: 100%;
   left: 0;
+  z-index: 401;
 
   ${breakpoint('md')`
     position: static;
