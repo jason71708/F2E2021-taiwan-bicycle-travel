@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import ReactTooltip from 'react-tooltip'
 import { PositionButtonWrapper } from './styled'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../../store'
 import { geolocationUpdateAction, geolocationResetAction } from '../../store/geolocation'
+import { stationRequestAction } from '../../store/station'
 
 const PositionButton = () => {
   const [watchPositionId, setWatchPositionId] = useState<number | null>(null)
@@ -15,7 +17,8 @@ const PositionButton = () => {
   const positionHandler = () => {
     if ('geolocation' in navigator) {
       if (position) {
-        stopWatchPositionAndReset()
+        // stopWatchPositionAndReset()
+        dispatch(stationRequestAction({ position }))
       } else {
         watchPositionAndUpdate()
       }
@@ -38,21 +41,28 @@ const PositionButton = () => {
     setWatchPositionId(watchId)
   }
 
-  const stopWatchPositionAndReset = () => {
-    if (watchPositionId) {
-      navigator.geolocation.clearWatch(watchPositionId)
-      dispatch(geolocationResetAction())
-    }
-  }
+  // const stopWatchPositionAndReset = () => {
+  //   if (watchPositionId) {
+  //     navigator.geolocation.clearWatch(watchPositionId)
+  //     dispatch(geolocationResetAction())
+  //   }
+  // }
 
   return (
-    <PositionButtonWrapper
-      active={!!position}
-      locating={locating}
-      onClick={() => positionHandler()}
-    >
-      <i className="fas fa-crosshairs"></i>
-    </PositionButtonWrapper>
+    <>
+      <PositionButtonWrapper
+        data-tip
+        data-for="postitionButton"
+        active={!!position}
+        locating={locating}
+        onClick={() => positionHandler()}
+      >
+        <i className="fas fa-crosshairs"></i>
+      </PositionButtonWrapper>
+      <ReactTooltip id='postitionButton' place="bottom" type="dark" effect="solid">
+        搜尋附近
+      </ReactTooltip>
+    </>
   )
 }
 

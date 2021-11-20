@@ -13,8 +13,13 @@ const userPositionIcon = new (L.icon as any)({
 
 const PositionMarker = ({ position }: { position: [number, number] }) => {
   return (
-    <LeafMarker icon={userPositionIcon} position={position}>
-      <Tooltip>
+    <LeafMarker
+      data-tip
+      data-for="postitionMarker"
+      icon={userPositionIcon}
+      position={position}
+    >
+      <Tooltip offset={[20, 0]}>
         <TooltipContentWrapper>
           現在位置
         </TooltipContentWrapper>

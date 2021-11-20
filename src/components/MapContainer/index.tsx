@@ -1,4 +1,5 @@
 
+import { useEffect, useRef, useState } from 'react'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { MapContainer as Map, TileLayer } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
@@ -6,10 +7,8 @@ import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { Routes } from '../../constants/routes'
-import SearchList from '../SearchList'
-import { useEffect, useRef, useState } from 'react'
-import PositionButton from '../PositionButton'
 import { GeolocationInitialState } from '../../store/geolocation'
+import Layout from '../Layout'
 import Markers from '../Marks'
 import { DisplayStationStatus } from '../../store/types'
 
@@ -51,11 +50,10 @@ const MapContainer = () => {
     >
       <RouterRoutes>
         <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
-        <Route path={Routes.Bicycle} element={<SearchList />}></Route>
+        <Route path={Routes.Bicycle} element={<Layout />}></Route>
         <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
         {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
       </RouterRoutes>
-      <PositionButton />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"

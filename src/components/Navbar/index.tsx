@@ -19,12 +19,12 @@ const NavBar = () => {
           找路線
         </LinkContent>
       </Link>
-      <Link to={Routes.Scenics}>
+      {/* <Link to={Routes.Scenics}>
         <LinkContent match={location.pathname === Routes.Scenics}>
           <i className="fas fa-umbrella-beach"></i>
           找景點
         </LinkContent>
-      </Link>
+      </Link> */}
     </NavBarWrapper>
   )
 }

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import theme from './theme'
 
 export default createGlobalStyle`
   * {
@@ -164,5 +165,21 @@ export default createGlobalStyle`
   }
   [hidden] {
     display: none;
+  }
+  .leaflet-tooltip {
+    background-color: ${theme.colors.grey[700]} !important;
+    border-color: ${theme.colors.grey[700]} !important;
+  }
+  .leaflet-tooltip-top:before {
+    border-top-color: ${theme.colors.grey[700]} !important;
+    }
+  .leaflet-tooltip-bottom:before {
+    border-bottom-color: ${theme.colors.grey[700]} !important;
+    }
+  .leaflet-tooltip-left:before {
+    border-left-color: ${theme.colors.grey[700]} !important;
+    }
+  .leaflet-tooltip-right:before {
+    border-right-color: ${theme.colors.grey[700]} !important;
   }
 `
