@@ -59,7 +59,7 @@ const PositionButton = () => {
       >
         <i className="fas fa-crosshairs"></i>
       </PositionButtonWrapper>
-      <ReactTooltip id='postitionButton' place="bottom" type="dark" effect="solid">
+      <ReactTooltip id='postitionButton' place="right" type="dark" effect="solid">
         搜尋附近
       </ReactTooltip>
     </>

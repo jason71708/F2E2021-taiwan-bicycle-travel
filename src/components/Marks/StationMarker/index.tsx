@@ -1,40 +1,44 @@
-import { useCallback } from 'react'
+import { useMemo } from 'react'
 import { Marker as LeafMarker, Popup } from 'react-leaflet'
 import { Station } from '../../../store/station'
-// import {  } from './styled'
 import L from 'leaflet'
-import stationDefaultSvg from '../../../assets/images/station-default.svg'
-import stationLimitedSvg from '../../../assets/images/station-limited.svg'
-import stationDisabledSvg from '../../../assets/images/station-disabled.svg'
-import { DisplayStationStatus } from '../../../store/types'
+import { DisplayTypes } from '../../../constants'
+import StationIcon from './StationIcon'
+import ReactDOMServer from 'react-dom/server'
+import { StationStatus } from '../../../constants'
+import { useMap } from 'react-leaflet'
 
-const stationIcons = [stationDefaultSvg, stationLimitedSvg, stationDisabledSvg].map(svg => {
-  return new (L.icon as any)({
-    iconUrl: svg,
-    iconSize: [29, 39],
-    iconAnchor: [15, 20],
-    popupAnchor: [0, -10]
+const generateStationIcon = (status: StationStatus, quantity: number) => {
+  return L.divIcon({
+    iconSize: [45, 60],
+    iconAnchor: [22.5, 30],
+    popupAnchor: [175, 180],
+    html: ReactDOMServer.renderToString(<StationIcon status={status} quantity={quantity} />)
   })
-})
+}
 
-const StationMarker = ({ station, type }: { station: Station, key: string, type: DisplayStationStatus }) => {
-  const displayIcon = useCallback((station: Station, type: DisplayStationStatus) => {
-    if (station.ServiceStatus !== 1) return stationIcons[2]
-    if (type === DisplayStationStatus.Rent) {
-      return station.AvailableRentBikes <= 5 ? stationIcons[1] : stationIcons[0]
-    }
-    if (type === DisplayStationStatus.Return) {
-      return station.AvailableReturnBikes <= 5 ? stationIcons[1] : stationIcons[0]
-    }
-    return stationIcons[2]
-  }, [])
+const StationMarker = ({ station, type }: { station: Station, key: string, type: DisplayTypes }) => {
+  const map = useMap()
+  const displayIcon = useMemo(() => {
+    if (station.ServiceStatus !== 1) return generateStationIcon(StationStatus.Disabled, 0)
+    return generateStationIcon(
+      type === DisplayTypes.Bike ? station.AvailableRentBikes <= 5 ? StationStatus.Limited : StationStatus.Default
+        : station.AvailableReturnBikes <= 5 ? StationStatus.Limited : StationStatus.Default,
+      type === DisplayTypes.Bike ? station.AvailableRentBikes : station.AvailableReturnBikes
+    )
+  }, [station.AvailableRentBikes, station.AvailableReturnBikes, station.ServiceStatus, type])
 
   return (
     <LeafMarker
-      icon={displayIcon(station, type)}
+      icon={displayIcon}
       position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}
+      eventHandlers={{
+        click: () => {
+          map.flyTo([station.StationPosition.PositionLat, station.StationPosition.PositionLon])
+        }
+      }}
     >
-      <Popup>
+      <Popup closeButton={false} minWidth={350} maxHeight={100}>
         <h1>{station.StationName.Zh_tw.split('_')[1]}</h1>
         <p>{station.AvailableRentBikes}</p>
         <p>{station.AvailableReturnBikes}</p>

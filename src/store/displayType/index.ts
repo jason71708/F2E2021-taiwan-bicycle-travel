@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-export enum DisplayTypes {
-  Bike = 'Bike',
-  Parking = 'Parking'
-}
+import { DisplayTypes } from '../../constants'
 
 export type DisplayTypeState = {
   type: DisplayTypes

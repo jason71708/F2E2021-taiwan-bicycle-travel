@@ -4,15 +4,16 @@ import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { MapContainer as Map, TileLayer } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, AppDispatch } from '../../store'
+import { stationRequestAction } from '../../store/station'
 import { Routes } from '../../constants/routes'
 import { GeolocationInitialState } from '../../store/geolocation'
 import Layout from '../Layout'
 import Markers from '../Marks'
-import { DisplayStationStatus } from '../../store/types'
 
 const MapContainer = () => {
+  const dispatch = useDispatch<AppDispatch>()
   const positionHistory = useRef<GeolocationInitialState['position']>(null)
   const [map, setMap] = useState<LeafletMap | null>(null)
   const { data } = useSelector(
@@ -20,6 +21,9 @@ const MapContainer = () => {
   )
   const position = useSelector(
     (state: RootState) => state.geolocation.position
+  )
+  const { type } = useSelector(
+    (state: RootState) => state.displayType
   )
 
   useEffect(() => {
@@ -34,10 +38,11 @@ const MapContainer = () => {
       && position
       && map
     ) {
+      dispatch(stationRequestAction({ position }))
       map.flyTo([position[0], position[1]], 18)
     }
     positionHistory.current = position
-  }, [position, map])
+  }, [position, map, dispatch])
 
   return (
     <Map
@@ -64,7 +69,7 @@ const MapContainer = () => {
       <MarkerClusterGroup>
         {data.map(station => (
           <Markers.StationMarker
-            type={DisplayStationStatus.Rent}
+            type={type}
             key={station.StationID}
             station={station}
           />

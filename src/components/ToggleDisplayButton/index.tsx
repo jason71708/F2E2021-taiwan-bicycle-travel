@@ -1,7 +1,8 @@
 import { ToggleDisplayButtonWrapper, DisplayButton } from './styled'
 import { RootState, AppDispatch } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
-import { DisplayTypes, displayTypeUpdateAction } from '../../store/displayType'
+import { displayTypeUpdateAction } from '../../store/displayType'
+import { DisplayTypes } from '../../constants'
 
 const ToggleDisplayButton = () => {
   const dispatch = useDispatch<AppDispatch>()

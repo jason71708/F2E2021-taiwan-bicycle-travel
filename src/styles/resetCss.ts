@@ -172,14 +172,24 @@ export default createGlobalStyle`
   }
   .leaflet-tooltip-top:before {
     border-top-color: ${theme.colors.grey[700]} !important;
-    }
+  }
   .leaflet-tooltip-bottom:before {
     border-bottom-color: ${theme.colors.grey[700]} !important;
-    }
+  }
   .leaflet-tooltip-left:before {
     border-left-color: ${theme.colors.grey[700]} !important;
-    }
+  }
   .leaflet-tooltip-right:before {
     border-right-color: ${theme.colors.grey[700]} !important;
+  }
+  .leaflet-popup-tip {
+    display: none;
+  }
+  .leaflet-div-icon {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  .leaflet-popup-scrolled {
+    border: none !important;
   }
 `
