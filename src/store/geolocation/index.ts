@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type GeolocationInitialState = {
-  position: [number, number] | null
+  position: [number, number] | null,
+  center: [number, number]
 }
 
 const initialState: GeolocationInitialState = {
-  position: null
+  position: null,
+  center: [23.703875, 120.982024] // Taiwan
 }
 
-export type UpdatePayload = {
-  position: [number, number]
-}
+export type UpdatePayload = Partial<GeolocationInitialState>
 
 export const geolocationSlice = createSlice({
   name: 'geolocation',
@@ -21,7 +21,12 @@ export const geolocationSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.position = action.payload.position
+      if (action.payload.position !== undefined) {
+        state.position = action.payload.position
+      }
+      if (action.payload.center !== undefined) {
+        state.center = action.payload.center
+      }
     },
     reset: state => {
       state.position = null

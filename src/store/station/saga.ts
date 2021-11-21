@@ -5,6 +5,7 @@ import { stationRequestAction, stationSuccessAction, stationFailureAction, Reque
 import { fetchBikeStationByCity, fetchBikeStationNearBy, stationRequired, stationSearchFields } from '../../utils/api/station'
 import { fetchAvailabilityStationByCity, fetchAvailabilityStationNearBy, availabilityRequired } from '../../utils/api/availability'
 import { transformKeysToFilter, transfromPositionToSpatialFilter } from '../../utils/api'
+import { geolocationUpdateAction } from '../geolocation'
 
 function* fetchStationSaga({ payload }: PayloadAction<RequestPayload | NearByRequestPayload>) {
   try {
@@ -44,6 +45,19 @@ function* fetchStationSaga({ payload }: PayloadAction<RequestPayload | NearByReq
         data
       })
     )
+    if ('position' in payload) {
+      yield put(
+        geolocationUpdateAction({
+          center: payload.position
+        })
+      )
+    } else {
+      yield put(
+        geolocationUpdateAction({
+          center: [data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon]
+        })
+      )
+    }
   } catch (error: any) {
     yield put(
       stationFailureAction({

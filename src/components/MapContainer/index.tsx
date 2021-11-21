@@ -18,8 +18,8 @@ const MapContainer = () => {
   const { data } = useSelector(
     (state: RootState) => state.station
   )
-  const position = useSelector(
-    (state: RootState) => state.geolocation.position
+  const { position, center } = useSelector(
+    (state: RootState) => state.geolocation
   )
   const { type } = useSelector(
     (state: RootState) => state.displayType
@@ -27,26 +27,25 @@ const MapContainer = () => {
 
   useEffect(() => {
     if (data.length > 0 && map) {
-      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 18, { animate: false })
+      map.flyTo(center, 16, { animate: false })
     }
-  }, [data, map])
+  }, [data, center, map])
 
   useEffect(() => {
     if (
       positionHistory.current === null
       && position
-      && map
     ) {
       dispatch(stationRequestAction({ position }))
-      map.flyTo([position[0], position[1]], 18, { animate: false })
+      // map.flyTo([position[0], position[1]], 18, { animate: false })
     }
     positionHistory.current = position
-  }, [position, map, dispatch])
+  }, [position, dispatch])
 
   return (
     <Map
       style={{ height: '100%', width: '100%' }}
-      center={[23.703875, 120.982024]}
+      center={center}
       zoom={8}
       whenCreated={setMap}
       scrollWheelZoom={true}
