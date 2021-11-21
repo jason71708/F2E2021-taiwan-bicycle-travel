@@ -36,7 +36,7 @@ const StationMarker = ({ station, type }: { station: Station, type: DisplayTypes
       position={[station.StationPosition.PositionLat, station.StationPosition.PositionLon]}
       eventHandlers={{
         click: () => {
-          map.flyTo([station.StationPosition.PositionLat, station.StationPosition.PositionLon])
+          map.flyTo([station.StationPosition.PositionLat, station.StationPosition.PositionLon], 18)
         }
       }}
     >

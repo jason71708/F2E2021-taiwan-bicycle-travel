@@ -12,6 +12,17 @@ export const SearchListWrapper = styled.section`
   padding: 28px;
   border-radius: 8px;
   cursor: initial;
-  overflow: auto;
+  overflow: hidden;
   ${shawdowCss}
+`
+
+export const SearchBar = styled.div`
+  margin-bottom: 28px;
+`
+
+export const SearchResultListWrapper = styled.ul`
+  width: 100%;
+  height: calc(100% - 36px - 28px);
+  overflow: auto;
+  padding-right: 12px;
 `

@@ -1,6 +1,5 @@
 
 import { useEffect, useRef, useState } from 'react'
-import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { MapContainer as Map, TileLayer } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom'
@@ -28,7 +27,7 @@ const MapContainer = () => {
 
   useEffect(() => {
     if (data.length > 0 && map) {
-      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 15)
+      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 18)
     }
   }, [data, map])
 
@@ -66,15 +65,13 @@ const MapContainer = () => {
       {position && (
         <Markers.PositionMarker position={position} />
       )}
-      <MarkerClusterGroup>
-        {data.map(station => (
-          <Markers.StationMarker
-            type={type}
-            key={station.StationID}
-            station={station}
-          />
-        ))}
-      </MarkerClusterGroup>
+      {data.map(station => (
+        <Markers.StationMarker
+          type={type}
+          key={station.StationID}
+          station={station}
+        />
+      ))}
     </Map>
   )
 }
