@@ -16,3 +16,9 @@ export enum ServiceStatus {
   '正常營運',
   '暫停營運'
 }
+
+export enum Problems {
+  NoResult = 'NoResult',
+  PageNotFound = 'PageNotFound',
+  Error = 'Error'
+}

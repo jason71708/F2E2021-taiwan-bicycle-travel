@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { stationRequestAction } from '../../store/station'
 import { displayTypeUpdateAction } from '../../store/displayType'
 import ResultCard, { BadgeClick } from './ResultCard'
+import ProblemPlaceholder from '../ProblemPlaceholder'
+import { Problems } from '../../constants'
+import LoadingPlaceholder from '../LoadingPlaceholder'
 
 const SearchList = (
   { openSearchList, unfoldButtonClick }:
@@ -69,12 +72,8 @@ const SearchList = (
         </SearchInputWrapper>
       </SearchBar>
       <SearchResultListWrapper>
-        {pedding && (
-          <h1>Loading</h1>
-        )}
-        {error && (
-          <h1>伺服器錯誤</h1>
-        )}
+        {pedding && <LoadingPlaceholder />}
+        {error && <ProblemPlaceholder problem={Problems.Error} />}
         {!pedding && !error && (data.length > 0 ? (
           data.map(station => (
             <ResultCard
@@ -83,7 +82,7 @@ const SearchList = (
               badgeClick={badgeClickHandler}
             />
           ))) : (
-          <div>無搜尋結果</div>
+          <ProblemPlaceholder problem={Problems.NoResult} />
         ))}
       </SearchResultListWrapper>
     </SearchListWrapper>

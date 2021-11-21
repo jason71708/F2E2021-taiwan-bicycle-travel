@@ -4,7 +4,7 @@ import breakpoint from '../../styles/breakpoint'
 
 export const SearchListWrapper = styled.section<{ isUnfold: boolean }>`
   position: absolute;
-  bottom: ${props => props.isUnfold ? '0px' : '-230px'};
+  bottom: ${props => props.isUnfold ? '0px' : '-200px'};
   left: 0;
   width: 100vw;
   height: 300px;

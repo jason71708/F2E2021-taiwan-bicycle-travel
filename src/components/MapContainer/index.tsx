@@ -10,6 +10,8 @@ import { Routes } from '../../constants/routes'
 import { GeolocationInitialState } from '../../store/geolocation'
 import Layout from '../Layout'
 import Markers from '../Marks'
+import ProblemPlaceholder from '../ProblemPlaceholder'
+import { Problems } from '../../constants'
 
 const MapContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -37,7 +39,6 @@ const MapContainer = () => {
       && position
     ) {
       dispatch(stationRequestAction({ position }))
-      // map.flyTo([position[0], position[1]], 18, { animate: false })
     }
     positionHistory.current = position
   }, [position, dispatch])

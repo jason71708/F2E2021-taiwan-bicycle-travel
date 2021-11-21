@@ -9,7 +9,7 @@ export const PositionButtonWrapper = styled.button<{
 }>`
   position: absolute;
   right: 28px;
-  bottom: ${props => props.openSearchList ? 'calc(300px + 12px)' : 'calc(70px + 12px)'};
+  bottom: ${props => props.openSearchList ? 'calc(300px + 12px)' : 'calc(100px + 12px)'};
   width: 40px;
   height: 40px;
   border-radius: 100%;
