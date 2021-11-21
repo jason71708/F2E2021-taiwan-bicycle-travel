@@ -6,7 +6,7 @@ import { RootState, AppDispatch } from '../../store'
 import { geolocationUpdateAction, geolocationResetAction } from '../../store/geolocation'
 import { stationRequestAction } from '../../store/station'
 
-const PositionButton = () => {
+const PositionButton = ({ openSearchList }: { openSearchList: boolean }) => {
   const [watchPositionId, setWatchPositionId] = useState<number | null>(null)
   const [locating, setLocating] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
@@ -51,6 +51,7 @@ const PositionButton = () => {
   return (
     <>
       <PositionButtonWrapper
+        openSearchList={openSearchList}
         data-tip
         data-for="postitionButton"
         active={!!position}

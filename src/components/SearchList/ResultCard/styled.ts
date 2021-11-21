@@ -1,14 +1,23 @@
 import styled from 'styled-components'
+import breakpoint, { breakpoints } from '../../../styles/breakpoint'
 import { limitLineCss, stationStatusCss } from '../../../styles/helper'
 
 export const ResultCardWrapper = styled.li`
   display: block;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-bottom: 1px solid ${props => props.theme.colors.grey[300]};
 
   &:nth-child(n+2) {
-    padding-top: 20px;
+    padding-top: 10px;
+
+    @media screen and (min-width: ${breakpoints.md}px) {
+      padding-top: 20px;
+    }
   }
+
+  ${breakpoint('md')`
+    padding-bottom: 20px;
+  `}
 `
 
 export const ResultCardTitle = styled.h1`
@@ -29,17 +38,25 @@ export const ResultCardContentWrapper = styled.div`
 export const ResultCardBadge = styled.button`
   ${stationStatusCss}
   flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-align: center;
-  padding: 8px 0;
+  padding: 4px 20px;
   border-radius: 8px;
 
   &:nth-child(n+2) {
     margin-left: 20px;
   }
+
+  ${breakpoint('md')`
+    display: block;
+    padding: 8px 0;
+  `}
 `
 
 export const BadgeTitle = styled.span`
-  display: block;
+  display: inline-block;
   font-size: 15px;
   line-height: 20px;
   font-weight: 500;
@@ -47,14 +64,23 @@ export const BadgeTitle = styled.span`
   & i {
     margin-right: 4px;
   }
+
+  ${breakpoint('md')`
+    display: block;
+  `}
 `
 
 export const BadgeInfo = styled.span`
-  display: block;
-  font-size: 26px;
-  margin-top: 4px;
+  display: inline-block;
+  font-size: 20px;
   line-height: 32px;
   font-weight: 700;
+
+  ${breakpoint('md')`
+    display: block;
+    font-size: 26px;
+    margin-top: 4px;
+  `}
 `
 
 export const ResultCardTip = styled.span`

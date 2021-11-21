@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import SearchList from '../SearchList'
 import PositionButton from '../PositionButton'
 import ToggleDisplayButton from '../ToggleDisplayButton'
@@ -6,6 +6,7 @@ import L from 'leaflet'
 
 const Layout = () => {
   const domRef = useRef(null)
+  const [openSearchList, setOpenSearchList] = useState(false)
 
   const disableEventPropagation = useCallback(() => {
     if (domRef.current) {
@@ -24,9 +25,12 @@ const Layout = () => {
 
   return (
     <div ref={domRef}>
-      <SearchList />
+      <SearchList
+        openSearchList={openSearchList}
+        unfoldButtonClick={setOpenSearchList}
+      />
       <ToggleDisplayButton />
-      <PositionButton />
+      <PositionButton openSearchList={openSearchList}/>
     </div>
   )
 }

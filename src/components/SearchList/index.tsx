@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useMap } from 'react-leaflet'
-import { SearchListWrapper, SearchBar, SearchResultListWrapper, SearchInputWrapper, SearchInput, SearchButton, SearchSelect } from './styled'
+import { SearchListWrapper, SearchListUnfoldButton, SearchBar, SearchResultListWrapper, SearchInputWrapper, SearchInput, SearchButton, SearchSelect } from './styled'
 import availableCities from '../../constants/availableCities'
 import { RootState, AppDispatch } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,7 +8,10 @@ import { stationRequestAction } from '../../store/station'
 import { displayTypeUpdateAction } from '../../store/displayType'
 import ResultCard, { BadgeClick } from './ResultCard'
 
-const SearchList = () => {
+const SearchList = (
+  { openSearchList, unfoldButtonClick }:
+  { openSearchList: boolean, unfoldButtonClick: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const map = useMap()
   const dispatch = useDispatch<AppDispatch>()
   const { type } = useSelector(
@@ -32,7 +35,16 @@ const SearchList = () => {
   }
 
   return (
-    <SearchListWrapper>
+    <SearchListWrapper isUnfold={openSearchList}>
+      <SearchListUnfoldButton
+        onClick={() => unfoldButtonClick(!openSearchList)}
+      >
+        {openSearchList ? (
+          <i className="fas fa-angle-down"></i>
+        ) : (
+          <i className="fas fa-angle-up"></i>
+        )}
+      </SearchListUnfoldButton>
       <SearchBar>
         <SearchSelect onChange={e => setCity(e.target.value)}>
           {availableCities.map(city => (

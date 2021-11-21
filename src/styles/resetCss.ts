@@ -201,4 +201,7 @@ export default createGlobalStyle`
   .leaflet-popup-scrolled {
     border: none !important;
   }
+  .leaflet-bottom {
+    z-index: 401 !important;
+  }
 `

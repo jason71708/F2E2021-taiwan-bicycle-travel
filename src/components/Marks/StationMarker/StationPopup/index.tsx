@@ -3,10 +3,13 @@ import { Station } from '../../../../store/station'
 import { StationPopupTitle, StationPopupInfo, StationPopupStatus, StationPopupBadgeWrapper, StationPopupBadge } from './styled'
 import { ServiceStatus } from '../../../../constants'
 import { getStationStatusType } from '../../../../utils/status'
+import useBreakpoint from '../../../../hooks/useBreakpoint'
 
 const StationPopup = ({ station }: { station: Station }) => {
+  const isMdBp = useBreakpoint('md')
+
   return (
-    <Popup closeButton={false} minWidth={350} maxHeight={100}>
+    <Popup closeButton={false} minWidth={isMdBp ? 350 : 270} maxHeight={isMdBp ? 100 : 75}>
       <StationPopupInfo>
         <StationPopupTitle>{station.StationName.Zh_tw.split('_')[1]}</StationPopupTitle>
         <StationPopupStatus>{station.StationName.Zh_tw.split('_')[0]}</StationPopupStatus>

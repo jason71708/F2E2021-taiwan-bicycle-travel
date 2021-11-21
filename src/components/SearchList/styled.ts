@@ -1,25 +1,56 @@
 import styled from 'styled-components'
 import { shawdowCss } from '../../styles/helper'
+import breakpoint from '../../styles/breakpoint'
 
-export const SearchListWrapper = styled.section`
+export const SearchListWrapper = styled.section<{ isUnfold: boolean }>`
   position: absolute;
-  top: 36px;
-  left: 36px;
-  z-index: 401; // In order to biger than Map's z-index
-  width: 430px;
-  height: calc(100% - 72px);
+  bottom: ${props => props.isUnfold ? '0px' : '-230px'};
+  left: 0;
+  width: 100vw;
+  height: 300px;
+  padding: 16px;
+  z-index: 402; // In order to biger than Map's z-index
   background-color: ${props => props.theme.colors.grey[100]};
-  padding: 28px;
   border-radius: 8px;
   cursor: initial;
-  overflow: hidden;
+  /* overflow: hidden; */
   ${shawdowCss}
+  transition: bottom 0.3s linear;
+
+  ${breakpoint('md')`
+    top: 36px;
+    left: 36px;
+    width: 430px;
+    height: calc(100% - 72px);
+    padding: 28px;
+  `}
+`
+
+export const SearchListUnfoldButton = styled.button`
+  position: absolute;
+  bottom: 100%;
+  background-color: ${props => props.theme.colors.grey[100]};
+  width: 60px;
+  height: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px 6px 0 0;
+  z-index: 402;
+  font-size: 14px;
+
+  ${breakpoint('md')`
+    display: none;
+  `}
 `
 
 export const SearchBar = styled.div`
-  margin-bottom: 28px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
+
+  ${breakpoint('md')`
+    margin-bottom: 28px;
+  `}
 `
 
 export const SearchResultListWrapper = styled.ul`

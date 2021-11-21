@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 import { stationStatusCss } from '../../../../styles/helper'
+import breakpoint from '../../../../styles/breakpoint'
 
 export const StationPopupTitle = styled.h1`
-  font-size: 18px;
   font-weight: 700;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.3;
   color: ${props => props.theme.colors.primary[500]};
+
+  ${breakpoint('md')`
+    font-size: 18px;
+    line-height: 1.5;
+  `}
 `
 
 export const StationPopupInfo = styled.div`
@@ -42,12 +48,22 @@ export const StationPopupBadge = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 70px;
-  height: 30px;
-  padding: 0 12px;
+  width: auto;
+  height: auto;
+  padding: 1px 6px;
   border-radius: 4px;
+
+  & i {
+    margin-right: 8px;
+  }
 
   &:nth-child(n+2) {
     margin-left: 12px;
   }
+
+  ${breakpoint('md')`
+    width: 70px;
+    height: 30px;
+    padding: 0 12px;
+  `}
 `

@@ -13,12 +13,12 @@ const NavBar = () => {
           找單車
         </LinkContent>
       </Link>
-      <Link to={Routes.Routes}>
+      {/* <Link to={Routes.Routes}>
         <LinkContent match={location.pathname === Routes.Routes}>
           <i className="fas fa-route"></i>
           找路線
         </LinkContent>
-      </Link>
+      </Link> */}
       {/* <Link to={Routes.Scenics}>
         <LinkContent match={location.pathname === Routes.Scenics}>
           <i className="fas fa-umbrella-beach"></i>
