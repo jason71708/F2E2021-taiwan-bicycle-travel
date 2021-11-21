@@ -51,7 +51,7 @@ function* fetchStationSaga({ payload }: PayloadAction<RequestPayload | NearByReq
           center: payload.position
         })
       )
-    } else {
+    } else if (data.length > 0) {
       yield put(
         geolocationUpdateAction({
           center: [data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon]
