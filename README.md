@@ -11,7 +11,7 @@
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Redux-Saga](https://redux-saga.js.org/)
-- [Redux-Toolkit] (https://redux-toolkit.js.org/)
+- [Redux-Toolkit](https://redux-toolkit.js.org/)
 - [Styled Components](https://styled-components.com/)
 - [React-Router](https://reactrouter.com/)
 - And other useful plugins
