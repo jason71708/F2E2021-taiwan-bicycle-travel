@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/F2E2021-taiwan-bicycle-travel/static/js/main.0ab71d67.chunk.js",
-    "main.js.map": "/F2E2021-taiwan-bicycle-travel/static/js/main.0ab71d67.chunk.js.map",
+    "main.js": "/F2E2021-taiwan-bicycle-travel/static/js/main.f79aada2.chunk.js",
+    "main.js.map": "/F2E2021-taiwan-bicycle-travel/static/js/main.f79aada2.chunk.js.map",
     "runtime-main.js": "/F2E2021-taiwan-bicycle-travel/static/js/runtime-main.518069dc.js",
     "runtime-main.js.map": "/F2E2021-taiwan-bicycle-travel/static/js/runtime-main.518069dc.js.map",
-    "static/js/2.26dc0a21.chunk.js": "/F2E2021-taiwan-bicycle-travel/static/js/2.26dc0a21.chunk.js",
-    "static/js/2.26dc0a21.chunk.js.map": "/F2E2021-taiwan-bicycle-travel/static/js/2.26dc0a21.chunk.js.map",
+    "static/js/2.3dd08de7.chunk.js": "/F2E2021-taiwan-bicycle-travel/static/js/2.3dd08de7.chunk.js",
+    "static/js/2.3dd08de7.chunk.js.map": "/F2E2021-taiwan-bicycle-travel/static/js/2.3dd08de7.chunk.js.map",
     "index.html": "/F2E2021-taiwan-bicycle-travel/index.html",
-    "static/js/2.26dc0a21.chunk.js.LICENSE.txt": "/F2E2021-taiwan-bicycle-travel/static/js/2.26dc0a21.chunk.js.LICENSE.txt",
+    "static/js/2.3dd08de7.chunk.js.LICENSE.txt": "/F2E2021-taiwan-bicycle-travel/static/js/2.3dd08de7.chunk.js.LICENSE.txt",
     "static/media/dribbble-unscreen.04671d5f.gif": "/F2E2021-taiwan-bicycle-travel/static/media/dribbble-unscreen.04671d5f.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.518069dc.js",
-    "static/js/2.26dc0a21.chunk.js",
-    "static/js/main.0ab71d67.chunk.js"
+    "static/js/2.3dd08de7.chunk.js",
+    "static/js/main.f79aada2.chunk.js"
   ]
 }
