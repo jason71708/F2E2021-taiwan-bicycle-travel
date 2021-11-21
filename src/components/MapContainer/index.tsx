@@ -27,7 +27,7 @@ const MapContainer = () => {
 
   useEffect(() => {
     if (data.length > 0 && map) {
-      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 18)
+      map.flyTo([data[0].StationPosition.PositionLat, data[0].StationPosition.PositionLon], 18, { animate: false })
     }
   }, [data, map])
 
@@ -38,7 +38,7 @@ const MapContainer = () => {
       && map
     ) {
       dispatch(stationRequestAction({ position }))
-      map.flyTo([position[0], position[1]], 18)
+      map.flyTo([position[0], position[1]], 18, { animate: false })
     }
     positionHistory.current = position
   }, [position, map, dispatch])

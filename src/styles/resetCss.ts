@@ -95,9 +95,13 @@ export default createGlobalStyle`
   input {
     overflow: visible;
   }
+  input {
+    outline: none;
+  }
   button,
   select {
     text-transform: none;
+    outline: none;
   }
   button,
   [type="button"],
