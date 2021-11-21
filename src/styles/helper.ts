@@ -1,10 +1,11 @@
 import { css, keyframes } from 'styled-components'
+import { StationStatus } from '../constants'
 
 export const shawdowCss = css`
   box-shadow: 4px 4px 20px 0 ${props => props.theme.colors.grey[500]}30;
 `
 
-export const LimitLineCss = css<{ lineLimit: number }>`
+export const limitLineCss = css<{ lineLimit: number }>`
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
@@ -25,4 +26,15 @@ to {
 
 export const rotateAnimation = css`
   animation: ${rotate} 2s linear infinite;
+`
+
+export const stationStatusCss = css<{ status: StationStatus}>`
+  color: ${props => props.status === StationStatus.Default ? props.theme.colors.primary[500]
+    : props.status === StationStatus.Limited ? props.theme.colors.alert[600]
+    : props.theme.colors.grey[400]
+  };
+  background-color: ${props => props.status === StationStatus.Default ? props.theme.colors.primary[100]
+    : props.status === StationStatus.Limited ? props.theme.colors.alert[100]
+    : props.theme.colors.grey[200]
+  };
 `

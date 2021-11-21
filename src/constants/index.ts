@@ -1,3 +1,5 @@
+export const AVAILABLE_LIMIT = 5
+
 export enum StationStatus {
   Limited = 'Limited',
   Disabled = 'Disabled',
@@ -7,4 +9,10 @@ export enum StationStatus {
 export enum DisplayTypes {
   Bike = 'Bike',
   Parking = 'Parking'
+}
+
+export enum ServiceStatus {
+  '停止營運',
+  '正常營運',
+  '暫停營運'
 }

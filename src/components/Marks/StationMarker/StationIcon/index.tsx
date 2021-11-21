@@ -2,25 +2,18 @@ import { useMemo } from 'react'
 import { StationStatus } from '../../../../constants'
 import theme from '../../../../styles/theme'
 import { lighten } from 'polished'
-import styled from 'styled-components'
-
-const SvgText = styled.text<{ color: string, isOverTen: boolean }>`
-  fill: ${props => props.color};
-  font-size:24px;
-  font-weight: bold;
-  transform: ${props => props.isOverTen ? 'translateX(-14px)' : 'translateX(-7px)'};
-`
+import { SvgText } from './styled'
 
 const StationIcon = ({ status, quantity }: { status: StationStatus, quantity: number }) => {
   const pathColor = useMemo(() => {
     return status === StationStatus.Default ? theme.colors.primary[400]
-      : StationStatus.Limited ? theme.colors.alert[400]
+      : status === StationStatus.Limited ? theme.colors.alert[400]
       : theme.colors.grey[400]
   }, [status])
 
   const ellipseColor = useMemo(() => {
     return status === StationStatus.Default ? lighten(0.2, theme.colors.primary[400])
-      : StationStatus.Limited ? lighten(0.2, theme.colors.alert[400])
+      : status === StationStatus.Limited ? lighten(0.2, theme.colors.alert[400])
       : lighten(0.2, theme.colors.grey[400])
   }, [status])
 
