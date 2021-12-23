@@ -66,7 +66,7 @@ const SearchList = (
               }
             }}
           />
-          <SearchButton>
+          <SearchButton onClick={() => submitSearch(keyword, city)}>
             <i className="fas fa-search"></i>
           </SearchButton>
         </SearchInputWrapper>

@@ -10,9 +10,8 @@ import { Routes } from '../../constants/routes'
 import { GeolocationInitialState } from '../../store/geolocation'
 import DisableEventPropagationContainer from '../DisableEventPropagationContainer'
 import BicyclePage from '../BicyclePage'
+import RoutePage from '../RoutePage'
 import Markers from '../../components/Marks'
-import ProblemPlaceholder from '../../components/ProblemPlaceholder'
-import { Problems } from '../../constants'
 
 const MapContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -57,8 +56,7 @@ const MapContainer = () => {
         <RouterRoutes>
           <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
           <Route path={Routes.Bicycle} element={<BicyclePage />}></Route>
-          <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
-          {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
+          <Route path={Routes.Routes} element={<RoutePage />}></Route>
         </RouterRoutes>
       </DisableEventPropagationContainer>
       <TileLayer
