@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { BikeStation, BikeAvailability } from '../../utils/api/types'
+import { BikeStation, BikeAvailability } from '../../service/tdxApi/types'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { stationRequestAction, stationSuccessAction, stationFailureAction, RequestPayload, NearByRequestPayload } from '.'
-import { fetchBikeStationByCity, fetchBikeStationNearBy, stationRequired, stationSearchFields } from '../../utils/api/station'
-import { fetchAvailabilityStationByCity, fetchAvailabilityStationNearBy, availabilityRequired } from '../../utils/api/availability'
-import { transformKeysToFilter, transfromPositionToSpatialFilter } from '../../utils/api'
+import { fetchBikeStationByCity, fetchBikeStationNearBy, stationRequired, stationSearchFields } from '../../service/tdxApi/station'
+import { fetchAvailabilityStationByCity, fetchAvailabilityStationNearBy, availabilityRequired } from '../../service/tdxApi/availability'
+import { transformKeysToFilter, transfromPositionToSpatialFilter } from '../../service/tdxApi'
 import { geolocationUpdateAction } from '../geolocation'
 
 function* fetchStationSaga({ payload }: PayloadAction<RequestPayload | NearByRequestPayload>) {

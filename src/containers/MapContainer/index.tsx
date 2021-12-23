@@ -8,9 +8,10 @@ import { RootState, AppDispatch } from '../../store'
 import { stationRequestAction } from '../../store/station'
 import { Routes } from '../../constants/routes'
 import { GeolocationInitialState } from '../../store/geolocation'
-import Layout from '../Layout'
-import Markers from '../Marks'
-import ProblemPlaceholder from '../ProblemPlaceholder'
+import DisableEventPropagationContainer from '../DisableEventPropagationContainer'
+import BicyclePage from '../BicyclePage'
+import Markers from '../../components/Marks'
+import ProblemPlaceholder from '../../components/ProblemPlaceholder'
 import { Problems } from '../../constants'
 
 const MapContainer = () => {
@@ -52,12 +53,14 @@ const MapContainer = () => {
       scrollWheelZoom={true}
       zoomControl={false}
     >
-      <RouterRoutes>
-        <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
-        <Route path={Routes.Bicycle} element={<Layout />}></Route>
-        <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
-        {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
-      </RouterRoutes>
+      <DisableEventPropagationContainer>
+        <RouterRoutes>
+          <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
+          <Route path={Routes.Bicycle} element={<BicyclePage />}></Route>
+          <Route path={Routes.Routes} element={<div>Routes</div>}></Route>
+          {/* <Route path="*" element={<ProblemPlaceholder problem={Problems.PageNotFound}/>} /> */}
+        </RouterRoutes>
+      </DisableEventPropagationContainer>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"

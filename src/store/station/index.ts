@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { BikeStation, BikeAvailability } from '../../utils/api/types'
+import { BikeStation, BikeAvailability } from '../../service/tdxApi/types'
 import { InitialState, SuccessPayload, FailurePayload } from '../types'
 
 export type Station = BikeStation & BikeAvailability

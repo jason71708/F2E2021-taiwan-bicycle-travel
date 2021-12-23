@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import breakpoint from './styles/breakpoint'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './components/Header'
-import MapContainer from './components/MapContainer'
+import MapContainer from './containers/MapContainer'
 
 const AppContent = styled.div`
   position: relative;
