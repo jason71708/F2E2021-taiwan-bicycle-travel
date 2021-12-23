@@ -1,8 +1,8 @@
-import { Station } from '../../../store/station'
+import { Station } from '../../store/station'
 import { ResultCardWrapper, ResultCardTitle, ResultCardContentWrapper, ResultCardBadge, BadgeTitle, BadgeInfo, ResultCardTip, ResultCardBorderTip } from './styled'
-import { getStationStatusType } from '../../../utils/status'
-import { ServiceStatus } from '../../../constants'
-import { DisplayTypes } from '../../../constants'
+import { getStationStatusType } from '../../utils/status'
+import { ServiceStatus } from '../../constants'
+import { DisplayTypes } from '../../constants'
 
 export type BadgeClick = (type: DisplayTypes, targetData: Station) => void
 

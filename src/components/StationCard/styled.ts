@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import breakpoint, { breakpoints } from '../../../styles/breakpoint'
-import { limitLineCss, stationStatusCss } from '../../../styles/helper'
+import breakpoint, { breakpoints } from '../../styles/breakpoint'
+import { limitLineCss, stationStatusCss } from '../../styles/helper'
 
 export const ResultCardWrapper = styled.li`
   display: block;
