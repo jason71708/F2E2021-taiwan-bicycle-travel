@@ -1,4 +1,5 @@
 import { tdxAPI, getAuthorizationHeader, GeneralParameter, SearchByCityParameter, NearByParameter } from '..'
+import { BikeAvailability } from '../types'
 
 export const availabilityRequired = ['StationID', 'ServiceStatus', 'AvailableRentBikes', 'AvailableReturnBikes']
 
@@ -7,9 +8,9 @@ export const fetchAvailabilityStationByCity = (
     $format = 'JSON',
     $filter,
     city
-  } : GeneralParameter & SearchByCityParameter
+  }: GeneralParameter & SearchByCityParameter
 ) => {
-  return tdxAPI.get(
+  return tdxAPI.get<BikeAvailability>(
     `/v2/Bike/Availability/${city}`,
     {
       headers: getAuthorizationHeader(),
@@ -25,9 +26,9 @@ export const fetchAvailabilityStationNearBy = (
   {
     $format = 'JSON',
     $spatialFilter
-  } : GeneralParameter & NearByParameter
+  }: GeneralParameter & NearByParameter
 ) => {
-  return tdxAPI.get(
+  return tdxAPI.get<BikeAvailability>(
     `/v2/Bike/Availability/NearBy`,
     {
       headers: getAuthorizationHeader(),
