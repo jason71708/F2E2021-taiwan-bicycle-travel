@@ -34,7 +34,7 @@ const SearchList = (
     if (type !== targetType) {
       dispatch(displayTypeUpdateAction({ type: targetType }))
     }
-    map.flyTo([targetData.StationPosition.PositionLat, targetData.StationPosition.PositionLon], 18, { animate: false })
+    map.flyTo([targetData.StationPosition.PositionLat, targetData.StationPosition.PositionLon], undefined, { animate: false })
   }
 
   return (
