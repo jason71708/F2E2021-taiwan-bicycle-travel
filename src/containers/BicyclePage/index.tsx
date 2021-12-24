@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useMap } from 'react-leaflet'
 import { RootState, AppDispatch } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
@@ -21,19 +21,22 @@ const BicyclePage = () => {
   )
   const [openSearchList, setOpenSearchList] = useState(false)
 
-  const badgeClickHandler: BadgeClick = (targetType, targetData) => {
-    if (type !== targetType) {
-      dispatch(displayTypeUpdateAction({ type: targetType }))
-    }
-    map.flyTo(
-      [
-        targetData.StationPosition.PositionLat,
-        targetData.StationPosition.PositionLon,
-      ],
-      undefined,
-      { animate: false }
-    )
-  }
+  const badgeClickHandler: BadgeClick = useCallback(
+    (targetType, targetData) => {
+      if (type !== targetType) {
+        dispatch(displayTypeUpdateAction({ type: targetType }))
+      }
+      map.flyTo(
+        [
+          targetData.StationPosition.PositionLat,
+          targetData.StationPosition.PositionLon,
+        ],
+        undefined,
+        { animate: false }
+      )
+    },
+    []
+  )
 
   const submitHandler = (keyword: string, city: string) => {
     dispatch(stationRequestAction({ keyword, city }))

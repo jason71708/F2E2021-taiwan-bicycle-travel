@@ -1,8 +1,9 @@
+import React from 'react'
 import { BikeShape } from '../../service/tdxApi/types'
 import * as styled from './styled'
 import { formatLength } from '../../utils'
 
-const RouteItem = ({ route }: { route: BikeShape }) => {
+const RouteItem = React.memo(({ route }: { route: BikeShape }) => {
   return (
     <styled.RouteItemWrapper>
       <styled.RouteItemTitle lineLimit={1}>
@@ -21,6 +22,6 @@ const RouteItem = ({ route }: { route: BikeShape }) => {
       </styled.RouteItemRow>
     </styled.RouteItemWrapper>
   )
-}
+})
 
 export default RouteItem
