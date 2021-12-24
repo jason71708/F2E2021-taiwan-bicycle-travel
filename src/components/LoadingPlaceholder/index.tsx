@@ -1,12 +1,12 @@
-import { LoadingWrapper, ElementWrapper } from './style'
+import * as Styled from './style'
 
 function LoadingPlaceholder() {
   return (
-    <LoadingWrapper>
-      <ElementWrapper>
+    <Styled.LoadingWrapper>
+      <Styled.ElementWrapper>
         <i className="fas fa-spinner"></i>
-      </ElementWrapper>
-    </LoadingWrapper>
+      </Styled.ElementWrapper>
+    </Styled.LoadingWrapper>
   )
 }
 
