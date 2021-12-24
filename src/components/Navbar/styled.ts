@@ -41,7 +41,7 @@ export const LinkContent = styled.span`
   font-size: 12px;
   transition: background-color 0.2s linear;
 
-  ${breakpoint('md')<{ match: boolean }>`
+  ${breakpoint('md') <{ match: boolean }>`
     display: inline-block;
     background-color: ${props => props.match ? props.theme.colors.primary[100] : props.theme.colors.grey[100]};
     border-radius: 8px;

@@ -2,7 +2,7 @@ const theme = {
   layout: {
     headerHeight: {
       default: '36px',
-      md: '75px'
+      md: '60px'
     }
   },
   typography: {

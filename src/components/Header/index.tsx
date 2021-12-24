@@ -2,6 +2,7 @@ import * as styled from './styled'
 import NavBar from '../Navbar'
 import useBreakpoint from '../../hooks/useBreakpoint'
 import { useState } from 'react'
+import TransitionContainer from '../../containers/TransitionContainer'
 
 const Header = () => {
   const isMdBp = useBreakpoint('md')
@@ -20,7 +21,9 @@ const Header = () => {
             </styled.MenuWrapper>
           )}
         </styled.HeaderContent>
-        {showMenu && !isMdBp && <NavBar />}
+        <TransitionContainer show={showMenu}>
+          <NavBar />
+        </TransitionContainer>
       </styled.HeaderWrapper>
     </>
   )
