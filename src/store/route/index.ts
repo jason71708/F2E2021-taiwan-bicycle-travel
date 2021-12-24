@@ -36,10 +36,15 @@ export const routeSlice = createSlice({
     failure: (state, action: PayloadAction<FailurePayload>) => {
       state.pedding = false
       state.error = action.payload.error
+    },
+    clear: (state, action: PayloadAction) => {
+      state.data = []
+      state.pedding = false
+      state.error = null
     }
   }
 })
 
-export const { request: routeRequestAction, success: routeSuccessAction, failure: routeFailureAction } = routeSlice.actions
+export const { request: routeRequestAction, success: routeSuccessAction, failure: routeFailureAction, clear: routeClearAction } = routeSlice.actions
 
 export default routeSlice.reducer

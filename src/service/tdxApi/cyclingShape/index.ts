@@ -13,7 +13,7 @@ export const fetchBikeCyclingShapByCity = (
   }: GeneralParameter & SearchByCityParameter
 ) => {
   return tdxAPI.get<BikeShape[]>(
-    `/v2/Bike/Availability/${city}`,
+    `/v2/Cycling/Shape/${city}`,
     {
       headers: getAuthorizationHeader(),
       params: {

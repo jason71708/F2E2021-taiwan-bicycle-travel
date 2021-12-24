@@ -38,10 +38,15 @@ export const stationSlice = createSlice({
     failure: (state, action: PayloadAction<FailurePayload>) => {
       state.pedding = false
       state.error = action.payload.error
+    },
+    clear: (state, action: PayloadAction) => {
+      state.data = []
+      state.pedding = false
+      state.error = null
     }
   }
 })
 
-export const { request: stationRequestAction, success: stationSuccessAction, failure: stationFailureAction } = stationSlice.actions
+export const { request: stationRequestAction, success: stationSuccessAction, failure: stationFailureAction, clear: stationClearAction } = stationSlice.actions
 
 export default stationSlice.reducer

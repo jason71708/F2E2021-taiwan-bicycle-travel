@@ -48,12 +48,12 @@ export type BikeShape = {
   readonly AuthorityName?: string
   readonly CityCode: string
   readonly City: string
-  readonly Town?: string
-  readonly RoadSectionStart?: string
-  readonly RoadSectionEnd?: string
-  readonly Direction?: string
+  readonly Town: string
+  readonly RoadSectionStart: string
+  readonly RoadSectionEnd: string
+  readonly Direction: string
   readonly CyclingType?: string
-  readonly CyclingLength?: number
+  readonly CyclingLength: number
   readonly FinishedTime?: string
   readonly UpdateTime: string
   readonly Geometry: string

@@ -1,14 +1,5 @@
 import React, { useState } from 'react'
-import {
-  SearchListWrapper,
-  SearchListUnfoldButton,
-  SearchBar,
-  SearchResultListWrapper,
-  SearchInputWrapper,
-  SearchInput,
-  SearchButton,
-  SearchSelect,
-} from './styled'
+import * as Styled from './styled'
 import availableCities from '../../constants/availableCities'
 
 const SearchList = ({
@@ -21,31 +12,33 @@ const SearchList = ({
   openSearchList: boolean
   toggleSearchList: React.Dispatch<React.SetStateAction<boolean>>
   children: React.ReactNode
-  placeholderText: string
+  placeholderText?: string
   submitHandler: (keyword: string, city: string) => void
 }) => {
   const [keyword, setKeyword] = useState('')
   const [city, setCity] = useState(availableCities[0].City)
 
   return (
-    <SearchListWrapper isUnfold={openSearchList}>
-      <SearchListUnfoldButton onClick={() => toggleSearchList(!openSearchList)}>
+    <Styled.SearchListWrapper isUnfold={openSearchList}>
+      <Styled.SearchListUnfoldButton
+        onClick={() => toggleSearchList(!openSearchList)}
+      >
         {openSearchList ? (
           <i className="fas fa-angle-down"></i>
         ) : (
           <i className="fas fa-angle-up"></i>
         )}
-      </SearchListUnfoldButton>
-      <SearchBar>
-        <SearchSelect onChange={(e) => setCity(e.target.value)}>
+      </Styled.SearchListUnfoldButton>
+      <Styled.SearchBar>
+        <Styled.SearchSelect onChange={(e) => setCity(e.target.value)}>
           {availableCities.map((city) => (
             <option key={city.City} value={city.City}>
               {city.CityName}
             </option>
           ))}
-        </SearchSelect>
-        <SearchInputWrapper>
-          <SearchInput
+        </Styled.SearchSelect>
+        <Styled.SearchInputWrapper>
+          <Styled.SearchInput
             type="text"
             value={keyword}
             placeholder={placeholderText || '搜尋'}
@@ -56,13 +49,15 @@ const SearchList = ({
               }
             }}
           />
-          <SearchButton onClick={() => submitHandler(keyword, city)}>
+          <Styled.SearchButton onClick={() => submitHandler(keyword, city)}>
             <i className="fas fa-search"></i>
-          </SearchButton>
-        </SearchInputWrapper>
-      </SearchBar>
-      <SearchResultListWrapper>{children}</SearchResultListWrapper>
-    </SearchListWrapper>
+          </Styled.SearchButton>
+        </Styled.SearchInputWrapper>
+      </Styled.SearchBar>
+      <Styled.SearchResultListWrapper>
+        {children}
+      </Styled.SearchResultListWrapper>
+    </Styled.SearchListWrapper>
   )
 }
 

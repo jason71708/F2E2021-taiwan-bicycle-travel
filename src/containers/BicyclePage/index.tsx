@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMap } from 'react-leaflet'
 import { RootState, AppDispatch } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
 import { displayTypeUpdateAction } from '../../store/displayType'
-import ResultCard, { BadgeClick } from '../../components/StationCard'
+import StationItem, { BadgeClick } from '../../components/StationItem'
 import ProblemPlaceholder from '../../components/ProblemPlaceholder'
 import { Problems } from '../../constants'
 import LoadingPlaceholder from '../../components/LoadingPlaceholder'
 import SearchList from '../../components/SearchList'
 import PositionButton from '../../components/PositionButton'
 import ToggleDisplayButton from '../../components/ToggleDisplayButton'
-import { stationRequestAction } from '../../store/station'
+import { stationRequestAction, stationClearAction } from '../../store/station'
 
 const BicyclePage = () => {
   const map = useMap()
@@ -39,6 +39,12 @@ const BicyclePage = () => {
     dispatch(stationRequestAction({ keyword, city }))
   }
 
+  useEffect(() => {
+    return () => {
+      dispatch(stationClearAction())
+    }
+  }, [dispatch])
+
   return (
     <>
       <SearchList
@@ -53,7 +59,7 @@ const BicyclePage = () => {
           !error &&
           (data.length > 0 ? (
             data.map((station) => (
-              <ResultCard
+              <StationItem
                 key={station.StationID}
                 station={station}
                 badgeClick={badgeClickHandler}

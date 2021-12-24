@@ -1,4 +1,4 @@
-import { HeaderWrapper, HeaderContent, LogoWrapper, MenuWrapper } from './styled'
+import * as styled from './styled'
 import NavBar from '../Navbar'
 import useBreakpoint from '../../hooks/useBreakpoint'
 import { useState } from 'react'
@@ -9,19 +9,19 @@ const Header = () => {
 
   return (
     <>
-      <HeaderWrapper>
-        <HeaderContent>
-          <LogoWrapper src="./logo.png" alt="logo" />
+      <styled.HeaderWrapper>
+        <styled.HeaderContent>
+          <styled.LogoWrapper src="./logo.png" alt="logo" />
           {isMdBp ? (
             <NavBar />
           ) : (
-            <MenuWrapper onClick={() => setShowMenu(!showMenu)}>
+            <styled.MenuWrapper onClick={() => setShowMenu(!showMenu)}>
               <i className="fas fa-bars"></i>
-            </MenuWrapper>
+            </styled.MenuWrapper>
           )}
-        </HeaderContent>
+        </styled.HeaderContent>
         {showMenu && !isMdBp && <NavBar />}
-      </HeaderWrapper>
+      </styled.HeaderWrapper>
     </>
   )
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import breakpoint, { breakpoints } from '../../styles/breakpoint'
 import { limitLineCss, stationStatusCss } from '../../styles/helper'
 
-export const ResultCardWrapper = styled.li`
+export const StationItemWrapper = styled.li`
   display: block;
   padding-bottom: 10px;
   border-bottom: 1px solid ${props => props.theme.colors.grey[300]};
@@ -20,7 +20,7 @@ export const ResultCardWrapper = styled.li`
   `}
 `
 
-export const ResultCardTitle = styled.h1`
+export const StationItemTitle = styled.h1`
   ${limitLineCss}
   font-size: 22px;
   line-height: 26px;
@@ -28,14 +28,14 @@ export const ResultCardTitle = styled.h1`
   color: ${props => props.theme.colors.primary[500]};
 `
 
-export const ResultCardContentWrapper = styled.div`
+export const StationItemContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 12px;
 `
 
-export const ResultCardBadge = styled.button`
+export const StationItemBadge = styled.button`
   ${stationStatusCss}
   flex: 1 0 auto;
   display: flex;
@@ -83,7 +83,7 @@ export const BadgeInfo = styled.span`
   `}
 `
 
-export const ResultCardTip = styled.span`
+export const StationItemTip = styled.span`
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;
@@ -95,7 +95,7 @@ export const ResultCardTip = styled.span`
   }
 `
 
-export const ResultCardBorderTip = styled(ResultCardTip)`
+export const StationItemBorderTip = styled(StationItemTip)`
   padding: 6px 12px;
   border: 1px solid ${props => props.theme.colors.grey[500]};
 `;
