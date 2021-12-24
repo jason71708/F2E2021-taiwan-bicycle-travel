@@ -5,15 +5,12 @@ import { limitLineCss } from '../../styles/helper'
 export const RouteItemWrapper = styled.li`
   display: block;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${props => props.theme.colors.grey[300]};
+  border-top: 1px solid ${props => props.theme.colors.grey[300]};
   cursor: pointer;
+  padding-top: 10px;
 
-  &:nth-child(n+2) {
-    padding-top: 10px;
-
-    @media screen and (min-width: ${breakpoints.md}px) {
-      padding-top: 20px;
-    }
+  @media screen and (min-width: ${breakpoints.md}px) {
+    padding-top: 20px;
   }
 
   ${breakpoint('md')`
@@ -30,16 +27,38 @@ export const RouteItemTitle = styled.h1`
 `
 
 export const RouteItemCyclingContent = styled.div`
-  width: 100%;
-  height: 100px;
+  position: relative;
   margin: 12px 0;
-  border: 1px solid #000;
+`
+
+const RouteItemCyclingText = styled.span`
+  padding: 8px 12px;
+  font-size: 15px;
+  background-color: ${props => props.theme.colors.primary[100]};
+  color: ${props => props.theme.colors.primary[500]};
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 8px;
+`
+
+export const RouteItemCyclingRoadSection = styled(RouteItemCyclingText)`
+  flex: 1 1 auto;
+`
+
+export const RouteItemCyclingTitle = styled(RouteItemCyclingText)`
+  flex: 0 0 auto;
+  margin-right: 8px;
+  margin-left: 20px;
 `
 
 export const RouteItemRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &:nth-child(n+2) {
+    margin-top: 12px;
+  }
 `
 
 export const RouteItemInfo = styled.span`
@@ -52,4 +71,14 @@ export const RouteItemInfo = styled.span`
   & i {
     margin-right: 6px;
   }
+`
+
+export const RouteItemDirection = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 60px;
+  transform: scaleX(0.5);
+  transform-origin: 0% 50%;
+  color: ${props => props.theme.colors.grey[500]};
 `

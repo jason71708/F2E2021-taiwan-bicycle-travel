@@ -6,6 +6,10 @@ export const HeaderWrapper = styled.section`
   width: 100vw;
   height: ${props => props.theme.layout.headerHeight.default};
   text-align: center;
+
+  ${breakpoint('md')`
+    height: ${props => props.theme.layout.headerHeight.md};
+  `}
 `
 
 export const HeaderContent = styled.div`

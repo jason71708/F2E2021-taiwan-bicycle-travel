@@ -5,14 +5,11 @@ import { limitLineCss, stationStatusCss } from '../../styles/helper'
 export const StationItemWrapper = styled.li`
   display: block;
   padding-bottom: 10px;
-  border-bottom: 1px solid ${props => props.theme.colors.grey[300]};
+  border-top: 1px solid ${props => props.theme.colors.grey[300]};
+  padding-top: 10px;
 
-  &:nth-child(n+2) {
-    padding-top: 10px;
-
-    @media screen and (min-width: ${breakpoints.md}px) {
-      padding-top: 20px;
-    }
+  @media screen and (min-width: ${breakpoints.md}px) {
+    padding-top: 20px;
   }
 
   ${breakpoint('md')`

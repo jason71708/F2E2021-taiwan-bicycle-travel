@@ -1,26 +1,46 @@
 import React from 'react'
 import { BikeShape } from '../../service/tdxApi/types'
-import * as styled from './styled'
+import * as Styled from './styled'
 import { formatLength } from '../../utils'
 
 const RouteItem = React.memo(({ route }: { route: BikeShape }) => {
   return (
-    <styled.RouteItemWrapper>
-      <styled.RouteItemTitle lineLimit={1}>
+    <Styled.RouteItemWrapper>
+      <Styled.RouteItemTitle lineLimit={1}>
         {route.RouteName}
-      </styled.RouteItemTitle>
-      <styled.RouteItemCyclingContent></styled.RouteItemCyclingContent>
-      <styled.RouteItemRow>
-        <styled.RouteItemInfo>
+      </Styled.RouteItemTitle>
+      <Styled.RouteItemCyclingContent>
+        <Styled.RouteItemRow>
+          <Styled.RouteItemCyclingTitle>起</Styled.RouteItemCyclingTitle>
+          <Styled.RouteItemCyclingRoadSection>
+            {route.RoadSectionStart}
+          </Styled.RouteItemCyclingRoadSection>
+        </Styled.RouteItemRow>
+        <Styled.RouteItemRow>
+          <Styled.RouteItemCyclingTitle>迄</Styled.RouteItemCyclingTitle>
+          <Styled.RouteItemCyclingRoadSection>
+            {route.RoadSectionEnd}
+          </Styled.RouteItemCyclingRoadSection>
+        </Styled.RouteItemRow>
+        <Styled.RouteItemDirection>
+          {route.Direction === '雙向' ? (
+            <i className="fas fa-arrows-alt-v"></i>
+          ) : (
+            <i className="fas fa-long-arrow-alt-down"></i>
+          )}
+        </Styled.RouteItemDirection>
+      </Styled.RouteItemCyclingContent>
+      <Styled.RouteItemRow>
+        <Styled.RouteItemInfo>
           <i className="fas fa-map-marker-alt"></i>
           {route.City}
-        </styled.RouteItemInfo>
-        <styled.RouteItemInfo>
+        </Styled.RouteItemInfo>
+        <Styled.RouteItemInfo>
           <i className="fas fa-route"></i>
           總長 {formatLength(route.CyclingLength)}
-        </styled.RouteItemInfo>
-      </styled.RouteItemRow>
-    </styled.RouteItemWrapper>
+        </Styled.RouteItemInfo>
+      </Styled.RouteItemRow>
+    </Styled.RouteItemWrapper>
   )
 })
 

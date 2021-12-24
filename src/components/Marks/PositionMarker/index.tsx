@@ -1,5 +1,5 @@
 import { Marker as LeafMarker, Tooltip } from 'react-leaflet'
-import * as styled from './styled'
+import * as Styled from './styled'
 import L from 'leaflet'
 // import userPositionSvg from '../../../assets/images/user-position.svg'
 import userPositionSvg from '../../../assets/images/dribbble-unscreen.gif'
@@ -20,7 +20,7 @@ const PositionMarker = ({ position }: { position: [number, number] }) => {
       position={position}
     >
       <Tooltip offset={[20, 0]}>
-        <styled.TooltipContentWrapper>現在位置</styled.TooltipContentWrapper>
+        <Styled.TooltipContentWrapper>現在位置</Styled.TooltipContentWrapper>
       </Tooltip>
     </LeafMarker>
   )
