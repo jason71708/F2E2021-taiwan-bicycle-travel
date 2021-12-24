@@ -7,10 +7,10 @@ import MapContainer from './containers/MapContainer'
 const AppContent = styled.div`
   position: relative;
   width: 100vw;
-  height: calc(100vh - ${props => props.theme.layout.headerHeight.default});
+  height: calc(100vh - ${(props) => props.theme.layout.headerHeight.default});
 
   ${breakpoint('md')`
-    height: calc(100vh - ${props => props.theme.layout.headerHeight.md});
+    height: calc(100vh - ${(props) => props.theme.layout.headerHeight.md});
   `}
 `
 
