@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react'
 import { MapContainer as Map, TileLayer } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
@@ -12,32 +11,40 @@ import DisableEventPropagationContainer from '../DisableEventPropagationContaine
 import BicyclePage from '../BicyclePage'
 import RoutePage from '../RoutePage'
 import Markers from '../../components/Marks'
+// import { antPath } from 'leaflet-ant-path'
+import Wkt from 'wicket'
+
+const wkt = new Wkt.Wkt()
 
 const MapContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
   const positionHistory = useRef<GeolocationInitialState['position']>(null)
   const [map, setMap] = useState<LeafletMap | null>(null)
-  const { data } = useSelector(
-    (state: RootState) => state.station
-  )
+  const { data: stations } = useSelector((state: RootState) => state.station)
+  const { data: routes } = useSelector((state: RootState) => state.route)
   const { position, center } = useSelector(
     (state: RootState) => state.geolocation
   )
-  const { type } = useSelector(
-    (state: RootState) => state.displayType
-  )
+  const { type } = useSelector((state: RootState) => state.displayType)
+
+  // useEffect(() => {
+  //   if ((routes.length > 0 || stations.length > 0) && map) {
+  //     map.flyTo(center, 16, { animate: false })
+  //   }
+  // }, [stations, routes, center, map])
 
   useEffect(() => {
-    if (data.length > 0 && map) {
-      map.flyTo(center, 16, { animate: false })
-    }
-  }, [data, center, map])
+    routes.forEach((route) => {
+      if (route.Geometry) {
+        const geojson = wkt.read(route.Geometry).toJson()
+        console.log(route.Direction)
+        console.log(geojson)
+      }
+    })
+  }, [routes])
 
   useEffect(() => {
-    if (
-      positionHistory.current === null
-      && position
-    ) {
+    if (positionHistory.current === null && position) {
       dispatch(stationRequestAction({ position }))
     }
     positionHistory.current = position
@@ -54,7 +61,10 @@ const MapContainer = () => {
     >
       <DisableEventPropagationContainer>
         <RouterRoutes>
-          <Route path="/" element={<Navigate to={Routes.Bicycle} replace={true} />}></Route>
+          <Route
+            path="/"
+            element={<Navigate to={Routes.Bicycle} replace={true} />}
+          ></Route>
           <Route path={Routes.Bicycle} element={<BicyclePage />}></Route>
           <Route path={Routes.Routes} element={<RoutePage />}></Route>
         </RouterRoutes>
@@ -63,16 +73,17 @@ const MapContainer = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       />
-      {position && (
-        <Markers.PositionMarker position={position} />
-      )}
-      {data.map(station => (
+      {position && <Markers.PositionMarker position={position} />}
+      {stations.map((station) => (
         <Markers.StationMarker
           type={type}
           key={station.StationID}
           station={station}
         />
       ))}
+      {/* {routes.map((route) => (
+        <Markers.RouteSet key={`start-${route.RouteName}`} />
+      ))} */}
     </Map>
   )
 }
