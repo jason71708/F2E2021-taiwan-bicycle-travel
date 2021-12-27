@@ -28,13 +28,13 @@ export const rotateAnimation = css`
   animation: ${rotate} 2s linear infinite;
 `
 
-export const stationStatusCss = css<{ status: StationStatus}>`
+export const stationStatusCss = css<{ status: StationStatus }>`
   color: ${props => props.status === StationStatus.Default ? props.theme.colors.primary[500]
     : props.status === StationStatus.Limited ? props.theme.colors.alert[600]
-    : props.theme.colors.grey[400]
+      : props.theme.colors.grey[400]
   };
   background-color: ${props => props.status === StationStatus.Default ? props.theme.colors.primary[100]
     : props.status === StationStatus.Limited ? props.theme.colors.alert[100]
-    : props.theme.colors.grey[200]
+      : props.theme.colors.grey[200]
   };
 `

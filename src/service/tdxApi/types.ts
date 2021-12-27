@@ -114,3 +114,5 @@ export type Town = {
   readonly TownCode: string
   readonly TownName: string
 }
+
+export type Polyline = [number, number][]
