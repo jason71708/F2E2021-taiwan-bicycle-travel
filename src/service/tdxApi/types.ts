@@ -18,6 +18,8 @@ export type NameType = {
   readonly En?: string
 }
 
+export type Polyline = [number, number][]
+
 export type BikeStation = {
   readonly StationUID?: string
   readonly StationID: string
@@ -58,6 +60,10 @@ export type BikeShape = {
   readonly UpdateTime: string
   readonly Geometry: string
   readonly EncodedPolyline: string
+}
+
+export type BikeShapeSorted = BikeShape & {
+  Routes: Polyline[]
 }
 
 export type ScenicSpotTourismInfo = {
@@ -114,5 +120,3 @@ export type Town = {
   readonly TownCode: string
   readonly TownName: string
 }
-
-export type Polyline = [number, number][]

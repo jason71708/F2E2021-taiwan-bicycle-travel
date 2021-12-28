@@ -1,19 +1,14 @@
 import styled from 'styled-components'
-import breakpoint, { breakpoints } from '../../styles/breakpoint'
+import breakpoint from '../../styles/breakpoint'
 import { limitLineCss, stationStatusCss } from '../../styles/helper'
 
 export const StationItemWrapper = styled.li`
   display: block;
-  padding-bottom: 10px;
   border-top: 1px solid ${props => props.theme.colors.grey[300]};
-  padding-top: 10px;
-
-  @media screen and (min-width: ${breakpoints.md}px) {
-    padding-top: 20px;
-  }
+  padding: 10px 28px 10px 16px;
 
   ${breakpoint('md')`
-    padding-bottom: 20px;
+    padding: 20px 40px 20px 28px;
   `}
 `
 

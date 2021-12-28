@@ -1,5 +1,9 @@
 import axios from 'axios'
 import jsSHA from 'jssha'
+import { BikeShape, BikeShapeSorted, Polyline } from './types'
+import Wkt from 'wicket'
+
+const wkt = new Wkt.Wkt()
 
 /**************************************************/
 /******** For TDX api authorization header ********/
@@ -77,16 +81,14 @@ type TransfromPositionToSpatialFilter = (
 export const transfromPositionToSpatialFilter: TransfromPositionToSpatialFilter = (position, range = 1000) =>
   `nearby(${position[0]},${position[1]},${range})`
 
-/***********************/
-/******** Unuse ********/
-/***********************/
+/*****************************************************/
+/******** Format BikeShape to BikeShapeSorted ********/
+/*****************************************************/
 
-// export const fetchRequest = <T>(url: string): Promise<T> => {
-//   return fetch(url)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error(response.statusText)
-//       }
-//       return response.json().then(data => data as T);
-//     })          
-// }
+export const formatBikeShape: (data: BikeShape) => BikeShapeSorted = data => {
+  const geojson = wkt.read(data.Geometry).toJson()
+  const routes = (geojson.coordinates as Polyline[]).map((coor) =>
+    coor.map((item) => item.reverse())
+  ) as Polyline[]
+  return { ...data, Routes: routes }
+}

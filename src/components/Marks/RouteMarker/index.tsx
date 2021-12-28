@@ -1,5 +1,5 @@
-import { Marker as LeafMarker, Tooltip } from 'react-leaflet'
-import { TooltipContentWrapper } from '../../../styles/globalStyled'
+import { Marker as LeafMarker } from 'react-leaflet'
+// import { TooltipContentWrapper } from '../../../styles/globalStyled'
 import L from 'leaflet'
 import RouteIcon from './RouteIcon'
 import ReactDOMServer from 'react-dom/server'
@@ -13,13 +13,7 @@ const generateRouteIcon = () => {
   })
 }
 
-const RouteMarker = ({
-  routeSection,
-  sectionName,
-}: {
-  routeSection: [number, number]
-  sectionName: string
-}) => {
+const RouteMarker = ({ routeSection }: { routeSection: [number, number] }) => {
   const map = useMap()
   const displayIcon = generateRouteIcon()
 
@@ -33,9 +27,9 @@ const RouteMarker = ({
         },
       }}
     >
-      <Tooltip offset={[15, -20]}>
+      {/* <Tooltip offset={[15, -20]}>
         <TooltipContentWrapper>{sectionName}</TooltipContentWrapper>
-      </Tooltip>
+      </Tooltip> */}
     </LeafMarker>
   )
 }

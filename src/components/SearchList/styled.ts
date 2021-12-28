@@ -8,7 +8,7 @@ export const SearchListWrapper = styled.section<{ isUnfold: boolean }>`
   left: 0;
   width: 100vw;
   height: 300px;
-  padding: 16px;
+  padding: 16px 0;
   z-index: 402; // In order to biger than Map's z-index
   background-color: ${props => props.theme.colors.grey[100]};
   border-radius: 8px;
@@ -22,7 +22,7 @@ export const SearchListWrapper = styled.section<{ isUnfold: boolean }>`
     left: 36px;
     width: 430px;
     height: calc(100% - 72px);
-    padding: 28px;
+    padding: 28px 0;
   `}
 `
 
@@ -47,9 +47,11 @@ export const SearchBar = styled.div`
   margin-bottom: 16px;
   display: flex;
   align-items: center;
+  padding: 0 16px;
 
   ${breakpoint('md')`
     margin-bottom: 28px;
+    padding: 0 28px;
   `}
 `
 
@@ -57,7 +59,6 @@ export const SearchResultListWrapper = styled.ul`
   width: 100%;
   height: calc(100% - 36px - 28px);
   overflow: auto;
-  padding-right: 12px;
 `
 
 export const SearchInputWrapper = styled.div`

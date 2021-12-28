@@ -11,19 +11,16 @@ import DisableEventPropagationContainer from '../DisableEventPropagationContaine
 import BicyclePage from '../BicyclePage'
 import RoutePage from '../RoutePage'
 import Markers from '../../components/Marks'
-import Wkt from 'wicket'
 import RouteSet from '../../components/Marks/RouteSet'
-import { Polyline } from '../../service/tdxApi/types'
-
-const wkt = new Wkt.Wkt()
 
 const MapContainer = () => {
   const dispatch = useDispatch<AppDispatch>()
   const positionHistory = useRef<GeolocationInitialState['position']>(null)
   const [map, setMap] = useState<LeafletMap | null>(null)
-  const [currentRoutes, setCurrentRoutes] = useState<Polyline[]>([])
   const { data: stations } = useSelector((state: RootState) => state.station)
-  const { data: routes } = useSelector((state: RootState) => state.route)
+  const { current: currentRoute } = useSelector(
+    (state: RootState) => state.route
+  )
   const { position, center } = useSelector(
     (state: RootState) => state.geolocation
   )
@@ -34,19 +31,6 @@ const MapContainer = () => {
   //     map.flyTo(center, 16, { animate: false })
   //   }
   // }, [stations, routes, center, map])
-
-  useEffect(() => {
-    routes.forEach((route, index) => {
-      if (route.Geometry && index === 0) {
-        const geojson = wkt.read(route.Geometry).toJson()
-        setCurrentRoutes(
-          (geojson.coordinates as Polyline[]).map((coor) =>
-            coor.map((item) => item.reverse())
-          ) as Polyline[]
-        )
-      }
-    })
-  }, [map, routes])
 
   useEffect(() => {
     if (positionHistory.current === null && position) {
@@ -86,9 +70,10 @@ const MapContainer = () => {
           station={station}
         />
       ))}
-      {currentRoutes.map((polyline, index) => (
-        <RouteSet key={`route-${index}`} polyline={polyline} />
-      ))}
+      {currentRoute &&
+        currentRoute.Routes.map((polyline, index) => (
+          <RouteSet key={`route-${index}`} polyline={polyline} />
+        ))}
     </Map>
   )
 }

@@ -1,4 +1,5 @@
 import theme from '../../../../styles/theme'
+import * as Styled from './styled'
 
 const RouteIcon = () => {
   const pathColor = theme.colors.accent[400]
@@ -16,6 +17,7 @@ const RouteIcon = () => {
         fill={pathColor}
       />
       <circle cx="29" cy="29" r="19" fill="#fff" />
+      <Styled.BikeIcon className="fas fa-biking" color={pathColor} />
     </svg>
   )
 }

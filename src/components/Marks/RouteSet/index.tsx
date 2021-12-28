@@ -15,11 +15,8 @@ const RouteSet = ({ polyline }: { polyline: PolylineType }) => {
 
   return (
     <>
-      <RouteMarker routeSection={polyline[0]} sectionName={'大橋頭'} />
-      <RouteMarker
-        routeSection={polyline[polyline.length - 1]}
-        sectionName={'大橋頭2'}
-      />
+      <RouteMarker routeSection={polyline[0]} />
+      <RouteMarker routeSection={polyline[polyline.length - 1]} />
       <Polyline pathOptions={polylineOption} positions={polyline} />
     </>
   )

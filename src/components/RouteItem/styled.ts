@@ -1,29 +1,33 @@
 import styled from 'styled-components'
-import breakpoint, { breakpoints } from '../../styles/breakpoint'
-import { limitLineCss } from '../../styles/helper'
+import breakpoint from '../../styles/breakpoint'
+import { limitLineCss, LineLimit } from '../../styles/helper'
 
-export const RouteItemWrapper = styled.li`
+type IsActive = {
+  active: boolean
+}
+
+export const RouteItemWrapper = styled.li<IsActive>`
   display: block;
-  padding-bottom: 10px;
   border-top: 1px solid ${props => props.theme.colors.grey[300]};
   cursor: pointer;
-  padding-top: 10px;
+  padding: 10px 28px 10px 16px;
+  background-color: ${props => props.active ? props.theme.colors.primary[500] : props.theme.colors.grey[100]};
 
-  @media screen and (min-width: ${breakpoints.md}px) {
-    padding-top: 20px;
+  &:hover {
+    background-color: ${props => props.active ? props.theme.colors.primary[500] : props.theme.colors.grey[200]};
   }
 
   ${breakpoint('md')`
-    padding-bottom: 20px;
+    padding: 20px 40px 20px 28px;
   `}
 `
 
-export const RouteItemTitle = styled.h1`
+export const RouteItemTitle = styled.h1<IsActive & LineLimit>`
   ${limitLineCss}
   font-size: 22px;
   line-height: 26px;
   font-weight: 700;
-  color: ${props => props.theme.colors.primary[500]};
+  color: ${props => props.active ? props.theme.colors.grey[100] : props.theme.colors.primary[500]};
 `
 
 export const RouteItemCyclingContent = styled.div`
@@ -31,10 +35,10 @@ export const RouteItemCyclingContent = styled.div`
   margin: 12px 0;
 `
 
-const RouteItemCyclingText = styled.span`
+const RouteItemCyclingText = styled.span<IsActive>`
   padding: 8px 12px;
   font-size: 15px;
-  background-color: ${props => props.theme.colors.primary[100]};
+  background-color: ${props => props.active ? props.theme.colors.grey[100] : props.theme.colors.primary[100]};
   color: ${props => props.theme.colors.primary[500]};
   font-weight: 500;
   line-height: 20px;
@@ -61,24 +65,24 @@ export const RouteItemRow = styled.div`
   }
 `
 
-export const RouteItemInfo = styled.span`
+export const RouteItemInfo = styled.span<IsActive>`
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;
   border-radius: 6px;
-  color: ${props => props.theme.colors.grey[500]};
+  color: ${props => props.active ? props.theme.colors.grey[200] : props.theme.colors.grey[500]};
 
   & i {
     margin-right: 6px;
   }
 `
 
-export const RouteItemDirection = styled.span`
+export const RouteItemDirection = styled.span<IsActive>`
   position: absolute;
   top: 0;
   left: 0;
   font-size: 60px;
   transform: scaleX(0.5);
   transform-origin: 0% 50%;
-  color: ${props => props.theme.colors.grey[500]};
+  color: ${props => props.active ? props.theme.colors.grey[100] : props.theme.colors.grey[500]};
 `

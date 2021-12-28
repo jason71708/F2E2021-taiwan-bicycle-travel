@@ -35,7 +35,7 @@ const BicyclePage = () => {
         { animate: false }
       )
     },
-    []
+    [dispatch, map, type]
   )
 
   const submitHandler = (keyword: string, city: string) => {

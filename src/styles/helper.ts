@@ -5,7 +5,11 @@ export const shawdowCss = css`
   box-shadow: 4px 4px 20px 0 ${props => props.theme.colors.grey[500]}30;
 `
 
-export const limitLineCss = css<{ lineLimit: number }>`
+export type LineLimit = {
+  lineLimit: number
+}
+
+export const limitLineCss = css<LineLimit>`
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;

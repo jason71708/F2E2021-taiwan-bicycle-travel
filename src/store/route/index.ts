@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { BikeShape } from '../../service/tdxApi/types'
+import { BikeShape, BikeShapeSorted } from '../../service/tdxApi/types'
 import { InitialState, SuccessPayload, FailurePayload } from '../types'
+import { formatBikeShape } from '../../service/tdxApi'
 
-const initialState: InitialState<BikeShape[]> = {
+const initialState: InitialState<BikeShapeSorted[]> & { current: BikeShapeSorted | null } = {
   pedding: false,
   data: [],
-  error: null
+  error: null,
+  current: null
 }
 
 export type RequestPayload = {
@@ -21,7 +23,7 @@ export const routeSlice = createSlice({
   name: 'route',
   initialState,
   reducers: {
-    request: (state, action: PayloadAction<RequestPayload | NearByRequestPayload>) => {
+    request: (state, action: PayloadAction<RequestPayload>) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
@@ -30,7 +32,7 @@ export const routeSlice = createSlice({
     },
     success: (state, action: PayloadAction<SuccessPayload<BikeShape[]>>) => {
       state.pedding = false
-      state.data = action.payload.data
+      state.data = action.payload.data.map(formatBikeShape)
       state.error = null
     },
     failure: (state, action: PayloadAction<FailurePayload>) => {
@@ -41,10 +43,20 @@ export const routeSlice = createSlice({
       state.data = []
       state.pedding = false
       state.error = null
+      state.current = null
+    },
+    setCurrent: (state, action: PayloadAction<{ route: BikeShapeSorted }>) => {
+      state.current = action.payload.route
     }
   }
 })
 
-export const { request: routeRequestAction, success: routeSuccessAction, failure: routeFailureAction, clear: routeClearAction } = routeSlice.actions
+export const {
+  request: routeRequestAction,
+  success: routeSuccessAction,
+  failure: routeFailureAction,
+  clear: routeClearAction,
+  setCurrent: routeSetCurrent
+} = routeSlice.actions
 
 export default routeSlice.reducer
