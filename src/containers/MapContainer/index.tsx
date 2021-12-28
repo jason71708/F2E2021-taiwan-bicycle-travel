@@ -26,18 +26,28 @@ const MapContainer = () => {
   )
   const { type } = useSelector((state: RootState) => state.displayType)
 
-  // useEffect(() => {
-  //   if ((routes.length > 0 || stations.length > 0) && map) {
-  //     map.flyTo(center, 16, { animate: false })
-  //   }
-  // }, [stations, routes, center, map])
+  useEffect(() => {
+    if (stations.length > 0 && map) {
+      map.flyTo(center, 16, { animate: false })
+    }
+  }, [stations, center, map])
 
   useEffect(() => {
-    if (positionHistory.current === null && position) {
-      dispatch(stationRequestAction({ position }))
+    if (currentRoute && map) {
+      map.flyTo(currentRoute.Routes[0][0], 16, { animate: false })
+    }
+  }, [map, currentRoute])
+
+  useEffect(() => {
+    if (positionHistory.current === null && position && map) {
+      if (/\/bicycle$/.test(window.location.pathname)) {
+        dispatch(stationRequestAction({ position }))
+      } else {
+        map.flyTo(position, 16, { animate: false })
+      }
     }
     positionHistory.current = position
-  }, [position, dispatch])
+  }, [position, dispatch, map])
 
   return (
     <Map

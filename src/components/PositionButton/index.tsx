@@ -8,8 +8,17 @@ import {
   geolocationResetAction,
 } from '../../store/geolocation'
 import { stationRequestAction } from '../../store/station'
+import { PositionButtonActions } from '../../constants'
+import { useMap } from 'react-leaflet'
 
-const PositionButton = ({ openSearchList }: { openSearchList: boolean }) => {
+const PositionButton = ({
+  openSearchList,
+  action,
+}: {
+  openSearchList: boolean
+  action: PositionButtonActions
+}) => {
+  const map = useMap()
   const [watchPositionId, setWatchPositionId] = useState<number | null>(null)
   const [locating, setLocating] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
@@ -19,7 +28,10 @@ const PositionButton = ({ openSearchList }: { openSearchList: boolean }) => {
     if ('geolocation' in navigator) {
       if (position) {
         // stopWatchPositionAndReset()
-        dispatch(stationRequestAction({ position }))
+        if (action === PositionButtonActions.Search) {
+          dispatch(stationRequestAction({ position }))
+        }
+        map.flyTo(position)
       } else {
         watchPositionAndUpdate()
       }
@@ -72,7 +84,7 @@ const PositionButton = ({ openSearchList }: { openSearchList: boolean }) => {
         type="dark"
         effect="solid"
       >
-        搜尋附近
+        我的位置
       </ReactTooltip>
     </>
   )

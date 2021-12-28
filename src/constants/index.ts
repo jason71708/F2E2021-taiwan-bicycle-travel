@@ -22,3 +22,8 @@ export enum Problems {
   PageNotFound = 'PageNotFound',
   Error = 'Error'
 }
+
+export enum PositionButtonActions {
+  Search,
+  Locate
+}

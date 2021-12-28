@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { displayTypeUpdateAction } from '../../store/displayType'
 import StationItem, { BadgeClick } from '../../components/StationItem'
 import ProblemPlaceholder from '../../components/ProblemPlaceholder'
-import { Problems } from '../../constants'
+import { Problems, PositionButtonActions } from '../../constants'
 import LoadingPlaceholder from '../../components/LoadingPlaceholder'
 import SearchList from '../../components/SearchList'
 import PositionButton from '../../components/PositionButton'
@@ -73,7 +73,10 @@ const BicyclePage = () => {
           ))}
       </SearchList>
       <ToggleDisplayButton />
-      <PositionButton openSearchList={openSearchList} />
+      <PositionButton
+        openSearchList={openSearchList}
+        action={PositionButtonActions.Search}
+      />
     </>
   )
 }

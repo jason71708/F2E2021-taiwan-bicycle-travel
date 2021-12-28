@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { BikeShape, BikeShapeSorted } from '../../service/tdxApi/types'
+import { BikeShapeSorted } from '../../service/tdxApi/types'
 import { InitialState, SuccessPayload, FailurePayload } from '../types'
-import { formatBikeShape } from '../../service/tdxApi'
 
 const initialState: InitialState<BikeShapeSorted[]> & { current: BikeShapeSorted | null } = {
   pedding: false,
@@ -30,9 +29,9 @@ export const routeSlice = createSlice({
       // immutable state based off those changes
       state.pedding = true
     },
-    success: (state, action: PayloadAction<SuccessPayload<BikeShape[]>>) => {
+    success: (state, action: PayloadAction<SuccessPayload<BikeShapeSorted[]>>) => {
       state.pedding = false
-      state.data = action.payload.data.map(formatBikeShape)
+      state.data = action.payload.data
       state.error = null
     },
     failure: (state, action: PayloadAction<FailurePayload>) => {

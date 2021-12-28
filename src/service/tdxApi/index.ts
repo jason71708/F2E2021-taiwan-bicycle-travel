@@ -87,8 +87,10 @@ export const transfromPositionToSpatialFilter: TransfromPositionToSpatialFilter 
 
 export const formatBikeShape: (data: BikeShape) => BikeShapeSorted = data => {
   const geojson = wkt.read(data.Geometry).toJson()
-  const routes = (geojson.coordinates as Polyline[]).map((coor) =>
-    coor.map((item) => item.reverse())
+  // API response data may have incorrect format
+  const routes = (geojson.coordinates as Polyline[]).filter(coor => {
+    return coor[0] && Array.isArray(coor[0])
+  }).map(coor => coor.map((item) => item.reverse())
   ) as Polyline[]
   return { ...data, Routes: routes }
 }

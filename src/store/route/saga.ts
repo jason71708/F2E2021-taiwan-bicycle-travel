@@ -1,8 +1,9 @@
 import { call, put, SagaReturnType, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { routeRequestAction, routeSuccessAction, routeFailureAction, RequestPayload } from '.'
+import { routeRequestAction, routeSuccessAction, routeFailureAction, routeSetCurrent, RequestPayload } from '.'
 import { fetchBikeCyclingShapByCity, required, searchFields, searchTownFields } from '../../service/tdxApi/cyclingShape'
 import { transformKeysToFilter } from '../../service/tdxApi'
+import { formatBikeShape } from '../../service/tdxApi'
 
 function* fetchRouteSaga({ payload }: PayloadAction<RequestPayload>) {
   try {
@@ -12,9 +13,16 @@ function* fetchRouteSaga({ payload }: PayloadAction<RequestPayload>) {
       city
     })
 
+    const sortedData = data.map(formatBikeShape)
+
     yield put(
       routeSuccessAction({
-        data
+        data: sortedData
+      })
+    )
+    yield put(
+      routeSetCurrent({
+        route: sortedData[0]
       })
     )
   } catch (error: any) {

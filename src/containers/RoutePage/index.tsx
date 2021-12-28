@@ -10,7 +10,7 @@ import {
   routeSetCurrent,
 } from '../../store/route'
 import ProblemPlaceholder from '../../components/ProblemPlaceholder'
-import { Problems } from '../../constants'
+import { PositionButtonActions, Problems } from '../../constants'
 import LoadingPlaceholder from '../../components/LoadingPlaceholder'
 
 const RoutePage = () => {
@@ -20,17 +20,12 @@ const RoutePage = () => {
   )
   const [openSearchList, setOpenSearchList] = useState(false)
 
-  const itemClickHandler: ItemOnClick = useCallback((data) => {
-    dispatch(routeSetCurrent({ route: data }))
-    // map.flyTo(
-    //   [
-    //     targetData.StationPosition.PositionLat,
-    //     targetData.StationPosition.PositionLon,
-    //   ],
-    //   undefined,
-    //   { animate: false }
-    // )
-  }, [])
+  const itemClickHandler: ItemOnClick = useCallback(
+    (data) => {
+      dispatch(routeSetCurrent({ route: data }))
+    },
+    [dispatch]
+  )
 
   const submitHandler = (keyword: string, city: string) => {
     dispatch(routeRequestAction({ keyword, city }))
@@ -67,7 +62,10 @@ const RoutePage = () => {
             <ProblemPlaceholder problem={Problems.NoResult} />
           ))}
       </SearchList>
-      <PositionButton openSearchList={openSearchList} />
+      <PositionButton
+        openSearchList={openSearchList}
+        action={PositionButtonActions.Locate}
+      />
     </>
   )
 }
