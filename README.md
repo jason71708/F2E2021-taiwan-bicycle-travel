@@ -9,6 +9,7 @@
 ## Built with
 
 - [React](https://reactjs.org/)
+- [Leaflet](https://leafletjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Redux-Saga](https://redux-saga.js.org/)
 - [Redux-Toolkit](https://redux-toolkit.js.org/)

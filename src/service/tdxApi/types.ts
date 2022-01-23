@@ -67,8 +67,8 @@ export type BikeShapeSorted = BikeShape & {
 }
 
 export type ScenicSpotTourismInfo = {
-  readonly ID: string
-  readonly Name?: string
+  readonly ScenicSpotID: string
+  readonly ScenicSpotName?: string
   readonly DescriptionDetail?: string
   readonly Description?: string
   readonly Phone?: string
@@ -95,8 +95,8 @@ export type ScenicSpotTourismInfo = {
 }
 
 export type RestaurantTourismInfo = {
-  readonly ID: string
-  readonly Name: string
+  readonly RestaurantID: string
+  readonly RestaurantName: string
   readonly Description?: string
   readonly DescriptionDetail?: string
   readonly Address?: string
