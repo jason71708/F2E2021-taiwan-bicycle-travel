@@ -1,8 +1,11 @@
 # Taiwan Bicycle Travel Website
 
 ![screenshot](https://jason71708.github.io/F2E2021-taiwan-bicycle-travel/screenshot.png)
+
 ## Features
-- Search Taiwan Bike Stations.
+
+- Search Bike Stations.
+- Search Bike Routes.
 - Mobile friendly.
 - Use keywords, city to filter.
 
@@ -18,9 +21,10 @@
 - And other useful plugins
 
 ## API resource
+
 [Taiwan Transport Data eXchange Service: TDX](https://tdx.transportdata.tw/api-service/swagger)
 
-
 ## Authors
+
 - Website - [傑森莊 Jason Zhuang](https://github.com/jason71708)
 - UI design - [Shiaohan](https://www.behance.net/hsiaohan)
