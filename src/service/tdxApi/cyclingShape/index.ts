@@ -1,7 +1,6 @@
 import { BikeShape } from '../types'
 import {
   tdxAPI,
-  getAuthorizationHeader,
   GeneralParameter,
   SearchByCityParameter,
 } from '..'
@@ -21,8 +20,7 @@ export const fetchBikeCyclingShapByCity = ({
   $filter,
   city,
 }: GeneralParameter & SearchByCityParameter) => {
-  return tdxAPI.get<BikeShape[]>(`/v2/Cycling/Shape/${city}`, {
-    headers: getAuthorizationHeader(),
+  return tdxAPI.get<BikeShape[]>(`/basic/v2/Cycling/Shape/City/${city}`, {
     params: {
       $format,
       $filter,

@@ -1,40 +1,12 @@
 import axios from 'axios'
-import jsSHA from 'jssha'
 import { BikeShape, BikeShapeSorted, Polyline } from './types'
 import Wkt from 'wicket'
 
 const wkt = new Wkt.Wkt()
 
-/**************************************************/
-/******** For TDX api authorization header ********/
-/**************************************************/
-
-export const getAuthorizationHeader = () => {
-  const UTCTime = new Date().toUTCString()
-  const ShaObj = new jsSHA('SHA-1', 'TEXT')
-  ShaObj.setHMACKey(process.env.REACT_APP_TDX_APP_KEY || '', 'TEXT')
-  ShaObj.update('x-date: ' + UTCTime)
-  const HMAC = ShaObj.getHMAC('B64')
-  const Authorization = `
-    hmac username="${process.env.REACT_APP_TDX_APP_ID}", algorithm="hmac-sha1", headers="x-date", signature="${HMAC}"
-  `
-  return {
-    Authorization,
-    'X-Date': UTCTime,
-  }
-}
-
-/***********************************************/
-/******** https://tdx.transportdata.tw/ ********/
-/***********************************************/
-
 export const tdxAPI = axios.create({
   baseURL: process.env.REACT_APP_TDX_API_URL,
 })
-
-/***************************************/
-/******** For TDX api parameter ********/
-/***************************************/
 
 export type GeneralParameter = {
   $format?: 'JSON' | 'XML'
@@ -54,10 +26,6 @@ export type NearByParameter = {
   $spatialFilter: ReturnType<TransfromPositionToSpatialFilter>
   $filter: ReturnType<TransformKeysToFilter>
 }
-
-/*********************************************/
-/******** Format special query string ********/
-/*********************************************/
 
 type TransformKeysToFilter = (
   required?: string[],
@@ -88,12 +56,7 @@ type TransfromPositionToSpatialFilter = (
   range?: number
 ) => string
 
-export const transfromPositionToSpatialFilter: TransfromPositionToSpatialFilter =
-  (position, range = 1000) => `nearby(${position[0]},${position[1]},${range})`
-
-/*****************************************************/
-/******** Format BikeShape to BikeShapeSorted ********/
-/*****************************************************/
+export const transfromPositionToSpatialFilter: TransfromPositionToSpatialFilter = (position, range = 1000) => `nearby(${position[0]},${position[1]},${range})`
 
 export const formatBikeShape: (data: BikeShape) => BikeShapeSorted = (data) => {
   const geojson = wkt.read(data.Geometry).toJson()

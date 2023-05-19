@@ -1,6 +1,5 @@
 import {
   tdxAPI,
-  getAuthorizationHeader,
   GeneralParameter,
   SearchByCityParameter,
   NearByParameter,
@@ -19,8 +18,7 @@ export const fetchAvailabilityStationByCity = ({
   $filter,
   city,
 }: GeneralParameter & SearchByCityParameter) => {
-  return tdxAPI.get<BikeAvailability>(`/v2/Bike/Availability/${city}`, {
-    headers: getAuthorizationHeader(),
+  return tdxAPI.get<BikeAvailability>(`/basic/v2/Bike/Availability/City/${city}`, {
     params: {
       $format,
       $filter,
@@ -32,8 +30,7 @@ export const fetchAvailabilityStationNearBy = ({
   $format = 'JSON',
   $spatialFilter,
 }: GeneralParameter & NearByParameter) => {
-  return tdxAPI.get<BikeAvailability>(`/v2/Bike/Availability/NearBy`, {
-    headers: getAuthorizationHeader(),
+  return tdxAPI.get<BikeAvailability>(`/advanced/v2/Bike/Availability/NearBy`, {
     params: {
       $format,
       $spatialFilter,
